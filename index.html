@@ -8,29 +8,34 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 
-<body>
-  <button class="setting-btn">
-    <span class="bar bar1"></span>
-    <span class="bar bar2"></span>
-    <span class="bar bar1"></span>
-  </button>
-  <div class="container">
-    <h1>Runde <span id="round">1</span></h1>
-    <div class="event-roller">
-      <div class="player-card">
-        <h3>Event dieser Runde:</h3>
-        <div id="eventContainer" class="event-container">
-          <!-- Die 5 rotierenden Events erscheinen hier -->
-        </div>
-        <div id="blindCountryContainer" class="hidden" style="margin-top: 2rem;">
-          <div style="font-weight: bold; margin-bottom: 0.5rem;">🌍 Blind Bet: Land wird gewählt...</div>
-          <div id="countrySlot" style="display: flex; gap: 10px; justify-content: center;"></div>
-        </div>
+<div class="main-layout">
+  <!-- Spieler 1 -->
+  <div class="player-side">
+    <div class="player-card-vertical">
+      <div class="player-images">
+        <img src="sources/snupi_icon.png" alt="Spieler 1" class="player-avatar">
+        <img src="sources/champion.png" alt="Champion" class="player-avatar">
       </div>
+      <div class="player-info">
+        <div class="player-name">Spieler 1</div>
+        <div class="player-score" id="score1">0 Punkte</div>
+      </div>
+    </div>
+  </div>
 
+  <!-- Mitte: Spielbereich -->
+  <div class="center-area">
+    <h1>Runde <span id="round">1</span></h1>
+
+    <div class="event-roller">
+      <h3>Event dieser Runde:</h3>
+      <div id="eventContainer" class="event-container"></div>
+      <div id="blindCountryContainer" class="hidden" style="margin-top: 2rem;">
+        <div style="font-weight: bold; margin-bottom: 0.5rem;">🌍 Blind Bet: Land wird gewählt...</div>
+        <div id="countrySlot" style="display: flex; gap: 10px; justify-content: center;"></div>
+      </div>
       <button onclick="startEventRoll()" class="cssbuttons-io-button">EVENT ROLLEN 🎲</button>
     </div>
-
 
     <div class="highest-bet">
       <label for="betInput">Highest Bet:</label>
@@ -53,34 +58,24 @@
       <button onclick="resolveBet(true)">Ja</button>
       <button onclick="resolveBet(false)">Nein</button>
     </div>
-
-    <div class="scores">
-      <div class="player-card-vertical">
-        <div class="player-images">
-          <img src="sources/snupi_icon.png" alt="Spieler 1" class="player-avatar">
-          <img src="sources/champion.png" alt="Champion" class="player-avatar">
-        </div>
-        <div class="player-info">
-          <div class="player-name">Spieler 1</div>
-          <div class="player-score" id="score1">0 Punkte</div>
-        </div>
-      </div>
-
-      <div class="player-card-vertical">
-        <div class="player-images">
-          <img src="sources/snupi_icon.png" alt="Spieler 1" class="player-avatar">
-          <img src="sources/champion.png" alt="Champion" class="player-avatar">
-        </div>
-        <div class="player-info">
-          <div class="player-name">Spieler 2</div>
-          <div class="player-score" id="score2">0 Punkte</div>
-        </div>
-      </div>
-
-    </div>
   </div>
 
-  <script src="script.js"></script>
+  <!-- Spieler 2 -->
+  <div class="player-side">
+    <div class="player-card-vertical">
+      <div class="player-images">
+        <img src="sources/champion.png" alt="Champion" class="player-avatar">
+        <img src="sources/snupi_icon.png" alt="Spieler 2" class="player-avatar">
+      </div>
+      <div class="player-info">
+        <div class="player-name">Spieler 2</div>
+        <div class="player-score" id="score2">0 Punkte</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 
 </html>
