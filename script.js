@@ -117,7 +117,7 @@ function renderEventDisplay(events) {
 
   events.forEach((eventText, index) => {
     const div = document.createElement("div");
-    div.classList.add("event");
+    div.classList.add("event", "card");
     if (index === 2) div.classList.add("center"); // mittleres Event
     div.textContent = eventText;
     container.appendChild(div);
@@ -181,7 +181,7 @@ function renderCountryDisplay(countries) {
 
   countries.forEach((name, index) => {
     const div = document.createElement("div");
-    div.classList.add("event");
+    div.classList.add("event", "card");
     if (index === 2) div.classList.add("center");
     div.textContent = name;
     container.appendChild(div);
