@@ -1,0 +1,59 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .container {
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  .highest-bet, .scores, #betDisplay, #resolveSection {
+    margin-top: 20px;
+  }
+  
+  .scores {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 40px;
+  }
+  
+  .player {
+    border: 1px solid #ccc;
+    padding: 15px;
+    width: 40%;
+    border-radius: 8px;
+  }
+  
+  .hidden {
+    display: none;
+  }
+
+  .event-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+    height: 100px;
+    overflow: hidden;
+  }
+  
+  .event {
+    opacity: 0.5;
+    transform: scale(0.7);
+    transition: all 0.3s ease;
+    padding: 5px 10px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    min-width: 100px;
+  }
+  
+  .event.center {
+    transform: scale(1.2);
+    opacity: 1;
+    font-weight: bold;
+    background-color: #ffd700;
+  }
+  

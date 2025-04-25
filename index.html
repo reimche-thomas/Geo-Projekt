@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bet Game</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Runde <span id="round">1</span></h1>
+    <div class="event-roller">
+        <h3>Event dieser Runde:</h3>
+        <div id="eventContainer" class="event-container">
+          <!-- Die 5 rotierenden Events erscheinen hier -->
+        </div>
+        <div id="blindCountryContainer" class="hidden" style="margin-top: 2rem;">
+            <div style="font-weight: bold; margin-bottom: 0.5rem;">🌍 Blind Bet: Land wird gewählt...</div>
+            <div id="countrySlot" style="display: flex; gap: 10px; justify-content: center;"></div>
+          </div>
+          
+        <button onclick="startEventRoll()">Event rollen 🎲</button>
+      </div>
+      
+
+    <div class="highest-bet">
+      <label for="betInput">Highest Bet:</label>
+      <input type="text" id="betInput" placeholder="z. B. 5 Münzen" />
+      <button onclick="submitBet()">Eintragen</button>
+    </div>
+
+    <div id="betDisplay" class="hidden">
+      <p>Bet: <strong id="currentBet"></strong></p>
+      <label>Wer hat den Bet gemacht?</label>
+      <select id="playerSelector">
+        <option value="player1">Spieler 1</option>
+        <option value="player2">Spieler 2</option>
+      </select>
+      <button onclick="assignBet()">Zuweisen</button>
+    </div>
+
+    <div id="resolveSection" class="hidden">
+      <p>Hat der Spieler den Bet bekommen?</p>
+      <button onclick="resolveBet(true)">Ja</button>
+      <button onclick="resolveBet(false)">Nein</button>
+    </div>
+
+    <div class="scores">
+      <div class="player" id="player1">
+        <h2>Spieler 1</h2>
+        <p>Punkte: <span id="score1">0</span></p>
+      </div>
+      <div class="player" id="player2">
+        <h2>Spieler 2</h2>
+        <p>Punkte: <span id="score2">0</span></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
