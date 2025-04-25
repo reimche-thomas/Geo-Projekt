@@ -80,7 +80,11 @@ function startEventRoll() {
       eventQueue = eventQueue.concat(shuffleArray(allEvents));
     }
 
-    // Hol 5 Events für Anzeige
+    // 1. Lösche die vorherigen Events im Event Container
+    const container = document.getElementById("eventContainer");
+    container.innerHTML = ""; // Hier wird der alte Inhalt entfernt
+
+    // 2. Hol die 5 neuen Events für die Anzeige
     const currentDisplay = eventQueue.slice(0, 5);
     renderEventDisplay(currentDisplay);
     eventQueue.push(eventQueue.shift()); // Drehe die Queue
@@ -148,6 +152,12 @@ function handleBlindBetSlot() {
         count++;
         if (count > 20) {
           clearInterval(interval);
+
+          const previousResult = document.querySelector("#blindCountryContainer .result");
+          if (previousResult) {
+            previousResult.remove(); // Entfernt das vorherige Land
+          }
+
           const selectedCountry = visible[2];
           console.log("🎯 Ausgewähltes Land:", selectedCountry);
 
@@ -155,6 +165,8 @@ function handleBlindBetSlot() {
           result.style.marginTop = "1rem";
           result.style.fontWeight = "bold";
           result.style.color = "#007700";
+          result.style.fontSize = "1.1em";
+          result.classList.add("result"); // Klasse hinzufügen, damit es leichter entfernt werden kann
           result.textContent = `🌐 Ausgewähltes Land: ${selectedCountry}`;
           document.getElementById("blindCountryContainer").appendChild(result);
         }

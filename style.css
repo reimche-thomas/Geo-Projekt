@@ -112,8 +112,8 @@ body {
 }
 
 .player-avatar {
-  width: 60px;
-  height: 60px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid white;
@@ -123,6 +123,8 @@ body {
 .player-info {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .player-name {
@@ -143,10 +145,13 @@ body {
   border-radius: 16px;
   color: white;
   text-shadow: 1px 1px 2px black;
-  width: 150px;
+  width: 200px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
   margin: 10px;
+  gap: 10px;
+  /* Abstand zwischen den Elementen */
 }
+
 
 .player-avatar-vertical {
   width: 80px;
