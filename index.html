@@ -1,27 +1,36 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bet Game</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+  <button class="setting-btn">
+    <span class="bar bar1"></span>
+    <span class="bar bar2"></span>
+    <span class="bar bar1"></span>
+  </button>
   <div class="container">
     <h1>Runde <span id="round">1</span></h1>
     <div class="event-roller">
+      <div class="player-card">
         <h3>Event dieser Runde:</h3>
         <div id="eventContainer" class="event-container">
           <!-- Die 5 rotierenden Events erscheinen hier -->
         </div>
         <div id="blindCountryContainer" class="hidden" style="margin-top: 2rem;">
-            <div style="font-weight: bold; margin-bottom: 0.5rem;">🌍 Blind Bet: Land wird gewählt...</div>
-            <div id="countrySlot" style="display: flex; gap: 10px; justify-content: center;"></div>
-          </div>
-          
-        <button onclick="startEventRoll()">Event rollen 🎲</button>
+          <div style="font-weight: bold; margin-bottom: 0.5rem;">🌍 Blind Bet: Land wird gewählt...</div>
+          <div id="countrySlot" style="display: flex; gap: 10px; justify-content: center;"></div>
+        </div>
       </div>
-      
+
+      <button onclick="startEventRoll()" class="cssbuttons-io-button">EVENT ROLLEN 🎲</button>
+    </div>
+
 
     <div class="highest-bet">
       <label for="betInput">Highest Bet:</label>
@@ -46,17 +55,26 @@
     </div>
 
     <div class="scores">
-      <div class="player" id="player1">
-        <h2>Spieler 1</h2>
-        <p>Punkte: <span id="score1">0</span></p>
+      <div class="player-card">
+        <img src="sources/snupi_icon.png" alt="Spieler 1" class="player-avatar">
+        <div class="player-info">
+          <div class="player-name">Spieler 1</div>
+          <div class="player-score" id="score1">0 Punkte</div>
+        </div>
       </div>
-      <div class="player" id="player2">
-        <h2>Spieler 2</h2>
-        <p>Punkte: <span id="score2">0</span></p>
+
+      <div class="player-card-vertical">
+        <img src="spieler2.png" alt="Spieler 2" class="player-avatar">
+        <div class="player-info">
+          <div class="player-name">Spieler 2</div>
+          <div class="player-score" id="score2">0 Punkte</div>
+        </div>
       </div>
+
     </div>
   </div>
 
   <script src="script.js"></script>
 </body>
+
 </html>

@@ -1,59 +1,346 @@
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .container {
-    max-width: 600px;
-    margin: auto;
-  }
-  
-  .highest-bet, .scores, #betDisplay, #resolveSection {
-    margin-top: 20px;
-  }
-  
-  .scores {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 40px;
-  }
-  
-  .player {
-    border: 1px solid #ccc;
-    padding: 15px;
-    width: 40%;
-    border-radius: 8px;
-  }
-  
-  .hidden {
-    display: none;
-  }
+  background-image: url('sources/background.png');
+  /* Pfad zum Bild */
+  background-size: cover;
+  /* Bild skaliert, um ganze Seite zu füllen */
+  background-position: center;
+  /* Bild zentrieren */
+  background-repeat: no-repeat;
+  /* Bild nicht wiederholen */
+  min-height: 100vh;
+  /* Volle Höhe, auch wenn wenig Inhalt */
+  margin: 0;
+  /* Standardmargin entfernen */
+  color: white;
+  /* Schriftfarbe */
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+  /* schwarze Outline */
+  font-size: 25px;
+}
 
-  .event-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin: 20px 0;
-    height: 100px;
-    overflow: hidden;
+@font-face {
+  font-family: "MeineSchrift";
+  src: url("sources/geofont.woff2") format("truetype");
+}
+
+body {
+  font-family: "MeineSchrift", sans-serif;
+}
+
+
+.container {
+  max-width: 600px;
+  margin: auto;
+}
+
+.highest-bet,
+.scores,
+#betDisplay,
+#resolveSection {
+  margin-top: 20px;
+}
+
+.scores {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 40px;
+}
+
+.player {
+  border: 1px solid #ccc;
+  padding: 15px;
+  width: 40%;
+  border-radius: 8px;
+}
+
+.hidden {
+  display: none;
+}
+
+.event-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+  height: 100px;
+  overflow: hidden;
+}
+
+.event {
+  opacity: 0.5;
+  transform: scale(0.7);
+  transition: all 0.3s ease;
+  padding: 5px 10px;
+  background-color: #f1f1f1;
+  border-radius: 8px;
+  min-width: 100px;
+}
+
+.event.center {
+  transform: scale(1.2);
+  opacity: 1;
+  font-weight: bold;
+  background-color: #ffa43d;
+}
+
+.player-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  /* Rundes Icon */
+  margin-right: 10px;
+  vertical-align: middle;
+  /* Bessere Ausrichtung neben Text */
+}
+
+.player-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 10px 20px;
+  border-radius: 12px;
+  margin: 10px 0;
+  width: fit-content;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+}
+
+.player-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+}
+
+.player-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.player-name {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.player-score {
+  font-size: 1em;
+}
+
+.player-card-vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 15px 20px;
+  border-radius: 16px;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+  width: 150px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+  margin: 10px;
+}
+
+.player-avatar-vertical {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+  border: 2px solid white;
+}
+
+.player-name {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.player-score {
+  font-size: 1em;
+  text-align: center;
+}
+
+
+
+.geo_design {
+  background-color: var(--ds-color-white-10);
+  border-radius: .5rem;
+  box-shadow: 0 .25rem 2.75rem rgba(32, 17, 46, .2), 0 1.125rem 2.25rem -1.125rem rgba(0, 0, 0, .24), 0 1.875rem 3.75rem -.625rem rgba(0, 0, 0, .16);
+  display: flex;
+  flex-direction: column;
+  height: 25rem;
+  justify-content: space-around;
+  min-width: 14.25rem;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none
+}
+
+.geo_design>* {
+  animation: user-stats-overview_popUp__RmEAg 1s ease-in-out forwards;
+  flex: 1 1
+}
+
+@media only screen and (max-width: 679px) {
+  .geo_design {
+    font-size: var(--font-size-18);
+    font-weight: 700;
+    line-height: var(--line-height-18)
   }
-  
-  .event {
-    opacity: 0.5;
-    transform: scale(0.7);
-    transition: all 0.3s ease;
-    padding: 5px 10px;
-    background-color: #f1f1f1;
-    border-radius: 8px;
-    min-width: 100px;
-  }
-  
-  .event.center {
-    transform: scale(1.2);
-    opacity: 1;
-    font-weight: bold;
-    background-color: #ffd700;
-  }
-  
+}
+
+.button_design {
+  max-width: 100%;
+  overflow: hidden;
+  padding: 0 .25rem;
+  text-overflow: ellipsis;
+  white-space: nowrap
+}
+
+.button_design {
+  margin-left: .25rem
+}
+
+/* Buttons */
+.setting-btn {
+  position: fixed;
+  /* Oder absolute, je nach Bedarf */
+  top: 20px;
+  right: 20px;
+
+  width: 45px;
+  height: 45px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background-color: rgb(129, 110, 216);
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0px 0px 0px 2px rgb(212, 209, 255);
+  z-index: 1000;
+  /* optional: sorgt dafür, dass der Button über anderen Elementen liegt */
+}
+
+
+.bar {
+  width: 50%;
+  height: 2px;
+  background-color: rgb(229, 229, 229);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: 2px;
+}
+
+.bar::before {
+  content: "";
+  width: 2px;
+  height: 2px;
+  background-color: rgb(126, 117, 255);
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid white;
+  transition: all 0.3s;
+  box-shadow: 0px 0px 5px white;
+}
+
+.bar1::before {
+  transform: translateX(-4px);
+}
+
+.bar2::before {
+  transform: translateX(4px);
+}
+
+.setting-btn:hover .bar1::before {
+  transform: translateX(4px);
+}
+
+.setting-btn:hover .bar2::before {
+  transform: translateX(-4px);
+}
+
+/* Buttons */
+.button_1 {
+  padding: 1.3em 3em;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+.button_1:hover {
+  background-color: #23c483;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+
+.button_1:active {
+  transform: translateY(-1px);
+}
+
+.cssbuttons-io-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .2em;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 16px;
+  padding: .5em 1.5em;
+  color: white;
+  background: linear-gradient(0deg, rgb(0, 150, 60), rgb(100, 250, 150));
+  border: none;
+  outline: none;
+  border-bottom: 3px solid rgb(0, 130, 40);
+  box-shadow: 0 .5em .5em -.4em rgb(0, 0, 0, .5);
+  letter-spacing: 0.08em;
+  border-radius: 20em;
+  cursor: pointer;
+  transition: .5s;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.cssbuttons-io-button:hover {
+  filter: brightness(1.2);
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.cssbuttons-io-button:active {
+  transition: 0s;
+  transform: rotate(-10deg);
+}
+
+.center-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inhalt {
+  text-align: center;
+}
