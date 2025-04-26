@@ -26,7 +26,7 @@ function submitBet() {
 
   // Text und Farbe anpassen
   const betInfo = document.getElementById("betInfo");
-  betInfo.innerHTML = `<span style="color: ${lastBetter === "player1" ? "lightcoral" : "lightskyblue"};">${lastBetter === "player1" ? player1name : player2name}</span> hat ${lastBetAmount} Punkte gesetzt!<br>Hat der Spieler den Bet bekommen?`;
+  betInfo.innerHTML = `<span style="color: ${lastBetter === "player1" ? "lightskyblue" : "lightcoral"};">${lastBetter === "player1" ? player1name : player2name}</span> hat ${lastBetAmount} Punkte gesetzt!<br>Hat der Spieler den Bet bekommen?`;
 
   // Buttons wieder aktivierbar machen
   document.getElementById("btn100").disabled = false;
