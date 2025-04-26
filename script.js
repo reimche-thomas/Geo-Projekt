@@ -12,6 +12,8 @@ let lastBetter = "player1";
 let lastBetAmount = 0;
 let player1Points = 0;
 let player2Points = 0;
+let player1name = document.getElementById("playername1").textContent;
+let player2name = document.getElementById("playername2").textContent;
 
 function submitBet() {
   if (lastCalledValue === 0) {
@@ -24,7 +26,7 @@ function submitBet() {
 
   // Text und Farbe anpassen
   const betInfo = document.getElementById("betInfo");
-  betInfo.innerHTML = `<span style="color: ${lastBetter === "player1" ? "lightcoral" : "lightskyblue"};">${lastBetter === "player1" ? "Spieler 1" : "Spieler 2"}</span> hat ${lastBetAmount} Punkte gesetzt!<br>Hat der Spieler den Bet bekommen?`;
+  betInfo.innerHTML = `<span style="color: ${lastBetter === "player1" ? "lightcoral" : "lightskyblue"};">${lastBetter === "player1" ? player1name : player2name}</span> hat ${lastBetAmount} Punkte gesetzt!<br>Hat der Spieler den Bet bekommen?`;
 
   // Buttons wieder aktivierbar machen
   document.getElementById("btn100").disabled = false;
@@ -35,6 +37,7 @@ function submitBet() {
   currentBet = 0;
   lastCalledValue = 0;
   document.getElementById("valueDisplay").textContent = currentBet;
+  changePlayer();
 }
 
 
@@ -50,10 +53,10 @@ function submitCall() {
   lastBetAmount = currentBet;
 
   if (currentPlayerTurn === "player1") {
-    betDisplay.style.color = "lightcoral";
+    betDisplay.style.color = "lightskyblue";
     lastBetter = "player1";
   } else {
-    betDisplay.style.color = "lightskyblue";
+    betDisplay.style.color = "lightcoral";
     lastBetter = "player2";
   }
 
@@ -184,10 +187,10 @@ function highlightCurrentPlayer() {
   // Dann dem aktuellen Spieler die Animation geben
   if (currentPlayerTurn === "player1") {
     player1Card.classList.add("active-turn");
-    player1Card.style.setProperty("--glow-color", "lightskyblue"); // Pastellblau
+    player1Card.style.setProperty("--glow-color", "lightcoral"); // Pastellblau
   } else {
     player2Card.classList.add("active-turn");
-    player2Card.style.setProperty("--glow-color", "lightcoral"); // Pastellrot
+    player2Card.style.setProperty("--glow-color", "lightskyblue"); // Pastellrot
   }
 }
 
