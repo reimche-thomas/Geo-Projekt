@@ -866,3 +866,17 @@ body {
   gap: 10px;
   /* Abstand zwischen den Elementen */
 }
+
+.resolve-area {
+  margin-top: -130px;
+}
+
+.round-display {
+  position: absolute;
+  /* Entfernt das Element aus dem normalen Layoutfluss */
+  top: 20px;
+  /* Setzt es 20px vom oberen Rand des Viewports */
+  left: 50%;
+  /* Setzt es horizontal in die Mitte */
+  transform: translateX(-50%);
+}

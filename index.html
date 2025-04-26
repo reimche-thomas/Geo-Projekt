@@ -28,7 +28,7 @@
   </div>
 
   <div class="center-area">
-    <h2>Runde <span id="round">1</span></h2>
+    <h2 class="round-display">Runde <span id="round">1</span></h2>
 
     <!-- Normaler Spielbereich -->
     <div id="bettingArea">
@@ -67,8 +67,8 @@
     </div>
 
     <!-- Bereich, der beim PASS angezeigt wird -->
-    <div id="resolveArea" class="hidden">
-      <h3>Bet Auflösung:</h3>
+    <div id="resolveArea" class="hidden" style="width:600px;">
+      <h3>Bet Auflösung</h3>
       <p id="betInfo"></p>
       <div class="button-container" style="margin-top: 1rem;">
         <button class="biggreenbutton" onclick="resolveBet(true)">✅ Ja</button>

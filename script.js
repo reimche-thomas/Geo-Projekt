@@ -21,10 +21,12 @@ function submitBet() {
   // Spielbereich verstecken, Resolve-Bereich zeigen
   document.getElementById("bettingArea").classList.add("hidden");
   document.getElementById("resolveArea").classList.remove("hidden");
+  document.getElementById("resolveArea").classList.add("eventcard");
+  document.getElementById("resolveArea").classList.add("resolve-area");
 
   // Text und Farbe anpassen
   const betInfo = document.getElementById("betInfo");
-  betInfo.innerHTML = `<span style="color: ${lastBetter === "player1" ? "lightskyblue" : "lightcoral"};">${lastBetter === "player1" ? player1name : player2name}</span> hat ${lastBetAmount} Punkte gesetzt!<br>Hat der Spieler den Bet bekommen?`;
+  betInfo.innerHTML = `<span style="color: ${lastBetter === "player1" ? "lightskyblue" : "lightcoral"};">${lastBetter === "player1" ? player1name : player2name}</span> hat ${lastBetAmount} Punkte gesetzt!<br>Hat er genug bekommen?`;
 
   // Buttons wieder aktivierbar machen
   document.getElementById("btn100").disabled = false;
