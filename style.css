@@ -246,6 +246,7 @@ body {
   font-size: 1.4rem;
   position: relative;
   transition: box-shadow 0.3s ease;
+  transform: translateY(5%);
 }
 
 /* Normales Styling bleibt */
@@ -872,11 +873,19 @@ body {
 }
 
 .round-display {
-  position: absolute;
-  /* Entfernt das Element aus dem normalen Layoutfluss */
-  top: 20px;
-  /* Setzt es 20px vom oberen Rand des Viewports */
+  position: fixed;
+  /* Fixiert das Element relativ zum Viewport */
+  top: 120px;
+  /* Setzt es 20px vom oberen Rand des Bildschirms */
   left: 50%;
-  /* Setzt es horizontal in die Mitte */
+  /* Zentriert es horizontal */
   transform: translateX(-50%);
+  /* Kompensiert die Verschiebung beim Zentrieren */
+  font-size: 1.5rem;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 10px;
+  z-index: 1000;
+  /* Stellt sicher, dass es immer oben ist */
 }
