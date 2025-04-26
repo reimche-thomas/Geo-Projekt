@@ -331,6 +331,8 @@ function renderCountryDisplay(countries) {
 }
 
 function increaseValue(amount) {
+  const betDisplay = document.getElementById("valueDisplay");
+  betDisplay.style.color = "white";
   if (currentBet + amount <= maxValue) {
     currentBet += amount;
     document.getElementById("valueDisplay").textContent = currentBet;
