@@ -6,7 +6,7 @@ let currentPlayer = "";
 let allEvents = [];
 let eventQueue = [];
 const maxValue = 5000;
-
+let currentPlayerTurn = "player1"; // Start bei Spieler 1
 
 function submitBet() {
   if (currentBet === 0) {
@@ -23,6 +23,30 @@ function submitBet() {
   document.getElementById("btn100").disabled = false;
   document.getElementById("btn500").disabled = false;
   document.getElementById("btn1000").disabled = false;
+}
+
+function submitCall() {
+  // Wechsel der Spielerfarbe und Spielerstatus
+  const betDisplay = document.getElementById("valueDisplay");
+
+  // Farbe des Bets je nach Spieler ändern
+  if (currentPlayerTurn === "player1") {
+    betDisplay.style.color = "lightcoral"; // Pastellrot für Spieler 1
+  } else {
+    betDisplay.style.color = "lightskyblue"; // Pastellblau für Spieler 2
+  }
+
+  // Spieler wechseln
+  changePlayer();
+}
+
+function changePlayer() {
+  // Wechsel zwischen den Spielern
+  currentPlayerTurn = currentPlayerTurn === "player1" ? "player2" : "player1";
+
+  // Optional: Anzeige, welcher Spieler dran ist
+  const playerDisplay = document.getElementById("playerDisplay");
+  playerDisplay.textContent = currentPlayerTurn === "player1" ? "Spieler 1 ist dran" : "Spieler 2 ist dran";
 }
 
 
