@@ -742,3 +742,13 @@ button:hover:before {
 .hidden {
   display: none;
 }
+
+.submit-button-container {
+  display: flex;
+  justify-content: center;
+  /* Zentriert die Buttons horizontal */
+  gap: 20px;
+  /* Abstand zwischen den beiden Buttons */
+  margin-top: 1rem;
+  /* Abstand nach oben zu den anderen Buttons */
+}
