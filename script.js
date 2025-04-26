@@ -396,13 +396,12 @@ function adjustScore(player, value) {
     document.getElementById("score2").textContent = score2 + " Punkte";
   }
 
+  // Runden nach der Punkteanpassung erhöhen
   adjustRounds();
 }
 
-// Funktion zum Rundenanpassen
 function adjustRounds() {
-  // Beispiel: Runden neu berechnen, wenn du z.B. "totalRounds" hast
-  // Hier müsstest du anpassen, wie du deine Runden aktuell speicherst!
-  // totalRounds = player1Score + player2Score;
-  // document.getElementById("roundDisplay").textContent = "Runde: " + totalRounds;
+  const totalScore = score1 + score2;
+  document.getElementById("round").textContent = totalScore + 1; // Anzeige aktualisieren
+
 }
