@@ -205,6 +205,7 @@ body {
   box-sizing: border-box;
 }
 
+/* Normales Styling bleibt */
 .player-card-vertical {
   background: rgba(0, 0, 0, 0.6);
   border-radius: 20px;
@@ -219,7 +220,72 @@ body {
   align-items: center;
   gap: 15px;
   font-size: 1.4rem;
+  position: relative;
+  transition: box-shadow 0.3s ease;
 }
+
+/* Für Spieler 1 */
+.player-card-vertical.active-turn-player1 {
+  animation: glowPlayer1 2s infinite;
+}
+
+/* Für Spieler 2 */
+.player-card-vertical.active-turn-player2 {
+  animation: glowPlayer2 2s infinite;
+}
+
+@keyframes glowPlayer1 {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px 10px lightskyblue;
+  }
+
+  50% {
+    box-shadow: 0 0 40px 20px lightskyblue;
+  }
+}
+
+@keyframes glowPlayer2 {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px 10px lightcoral;
+  }
+
+  50% {
+    box-shadow: 0 0 40px 20px lightcoral;
+  }
+}
+
+
+
+/* Standard: kein Glow */
+.player-card-vertical.active-turn {
+  animation: glowBorder 2s infinite;
+}
+
+/* Die Glow-Animation */
+@keyframes glowBorder {
+  0% {
+    box-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color), 0 0 30px var(--glow-color);
+  }
+
+  50% {
+    box-shadow: 0 0 20px var(--glow-color), 0 0 40px var(--glow-color), 0 0 60px var(--glow-color);
+  }
+
+  100% {
+    box-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color), 0 0 30px var(--glow-color);
+  }
+}
+
+/* Globale Farbeinstellung */
+:root {
+  --glow-color: lightskyblue;
+  /* Standard ist hellblau */
+}
+
 
 
 .player-avatar-vertical {

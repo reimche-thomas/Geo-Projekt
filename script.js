@@ -8,16 +8,23 @@ let eventQueue = [];
 const maxValue = 5000;
 let currentPlayerTurn = "player1"; // Start bei Spieler 1
 let lastCalledValue = 0;
+let lastBetter = "player1";
 
 function submitBet() {
-  if (currentBet === 0) {
+  if (lastCalledValue === 0) {
     return alert("Bitte einen Bet eintragen!");
   }
 
-  document.getElementById("currentBet").textContent = currentBet + " Münzen";
+  // Setze den letzten gesetzten Wert in die Anzeige
+  document.getElementById("currentBet").textContent = lastCalledValue + " Punkte";
   document.getElementById("betDisplay").classList.remove("hidden");
 
+  // Automatisch den letzten Spieler als Besitzer auswählen
+  document.getElementById("playerSelector").value = lastBetter;
+
+  // Reset für neues Bieten
   currentBet = 0;
+  lastCalledValue = 0;
   document.getElementById("valueDisplay").textContent = currentBet;
 
   // Buttons wieder aktivieren
@@ -29,16 +36,17 @@ function submitBet() {
 function submitCall() {
   // Wechsel der Spielerfarbe und Spielerstatus
   const betDisplay = document.getElementById("valueDisplay");
-  lastCalledValue = currentBet;
+  lastCalledValue = currentBet; // Achtung: hier korrigiert
 
   // Farbe des Bets je nach Spieler ändern
   if (currentPlayerTurn === "player1") {
-    betDisplay.style.color = "lightcoral"; // Pastellrot für Spieler 1
+    betDisplay.style.color = "lightcoral"; // Pastellrot
+    lastBetter = "player1"; // Merken, dass Spieler 1 zuletzt gesetzt hat
   } else {
-    betDisplay.style.color = "lightskyblue"; // Pastellblau für Spieler 2
+    betDisplay.style.color = "lightskyblue"; // Pastellblau
+    lastBetter = "player2"; // Merken, dass Spieler 2 zuletzt gesetzt hat
   }
 
-  // Spieler wechseln
   changePlayer();
 }
 
@@ -53,6 +61,22 @@ function decreaseValue(amount) {
   }
 }
 
+function updatePlayerTurn() {
+  const player1Card = document.getElementById("player1Card");
+  const player2Card = document.getElementById("player2Card");
+
+  // Erst alle Animationen entfernen
+  player1Card.classList.remove("active-turn-player1", "active-turn-player2");
+  player2Card.classList.remove("active-turn-player1", "active-turn-player2");
+
+  // Jetzt neuen Spieler aktivieren
+  if (currentPlayerTurn === "player1") {
+    player1Card.classList.add("active-turn-player1");
+  } else {
+    player2Card.classList.add("active-turn-player2");
+  }
+}
+
 
 function changePlayer() {
   // Wechsel zwischen den Spielern
@@ -60,7 +84,8 @@ function changePlayer() {
 
   // Optional: Anzeige, welcher Spieler dran ist
   const playerDisplay = document.getElementById("playerDisplay");
-  playerDisplay.textContent = currentPlayerTurn === "player1" ? "Spieler 1 ist dran" : "Spieler 2 ist dran";
+  //playerDisplay.textContent = currentPlayerTurn === "player1" ? "Spieler 1 ist dran" : "Spieler 2 ist dran";
+  updatePlayerTurn();
 }
 
 function assignBet() {
@@ -96,6 +121,28 @@ function resolveBet(success) {
   currentBet = "";
   currentPlayer = "";
 }
+
+function highlightCurrentPlayer() {
+  const player1Card = document.getElementById("player1Card");
+  const player2Card = document.getElementById("player2Card");
+
+  // Erstmal beide Spieler zurücksetzen
+  player1Card.classList.remove("active-turn");
+  player2Card.classList.remove("active-turn");
+
+  player1Card.style.setProperty("--glow-color", "transparent");
+  player2Card.style.setProperty("--glow-color", "transparent");
+
+  // Dann dem aktuellen Spieler die Animation geben
+  if (currentPlayerTurn === "player1") {
+    player1Card.classList.add("active-turn");
+    player1Card.style.setProperty("--glow-color", "lightskyblue"); // Pastellblau
+  } else {
+    player2Card.classList.add("active-turn");
+    player2Card.style.setProperty("--glow-color", "lightcoral"); // Pastellrot
+  }
+}
+
 
 // Event JSON laden
 fetch('events.json')
