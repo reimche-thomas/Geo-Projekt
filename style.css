@@ -404,6 +404,14 @@ body {
   /* Damit es überlappt */
 }
 
+.champion-img2 {
+  position: relative;
+  transform: translateX(-30px);
+  /* Verschiebt es leicht nach rechts */
+  z-index: 2;
+  /* Damit es überlappt */
+}
+
 /* From Uiverse.io by javadpg */
 .card {
   background-color: black;
