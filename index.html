@@ -19,6 +19,10 @@
       <div class="player-info">
         <div class="player-name" id="playername1">Snupi</div>
         <div class="player-score" id="score1">0 Punkte</div>
+        <div class="score-adjust-container">
+          <button onclick="adjustScore('player1', 1)" class="smallfix-button">+</button>
+          <button onclick="adjustScore('player1', -1)" class="smallfix-button">-</button>
+        </div>
       </div>
     </div>
   </div>
@@ -35,15 +39,15 @@
           <div style="font-weight: bold; margin-bottom: 0.5rem;">🌍 Blind Bet: Land wird gewählt...</div>
           <div id="countrySlot" style="display: flex; gap: 10px; justify-content: center;"></div>
         </div>
-        <button onclick="startEventRoll()">EVENT ROLLEN 🎲</button>
+        <button onclick="startEventRoll()" class="buttongreen">EVENT ROLLEN 🎲</button>
       </div>
 
       <div class="highest-bet">
         <label>Highest Bet:</label>
         <div id="valueDisplay" class="bet-display">0</div>
-        <button id="btn100" onclick="increaseValue(100)">+ 100</button>
-        <button id="btn500" onclick="increaseValue(500)">+ 500</button>
-        <button id="btn1000" onclick="increaseValue(1000)">+ 1000</button>
+        <button id="btn100" onclick="increaseValue(100)" class="buttongreen">+ 100</button>
+        <button id="btn500" onclick="increaseValue(500)" class="buttongreen">+ 500</button>
+        <button id="btn1000" onclick="increaseValue(1000)" class="buttongreen">+ 1000</button>
       </div>
       <div>
         <button id="btnm100" onclick="decreaseValue(100)" class="buttonred">- 100</button>
@@ -51,7 +55,7 @@
         <button id="btnm1000" onclick="decreaseValue(1000)" class="buttonred">- 1000</button>
       </div>
       <div class="submit-button-container">
-        <button onclick="submitCall()" style="width: 160px;">SUBMIT</button>
+        <button onclick="submitCall()" style="width: 160px;" class="buttongreen">SUBMIT</button>
         <button class="buttonred" onclick="submitBet()" style="width: 160px;">PASS</button>
       </div>
     </div>
@@ -78,6 +82,10 @@
       <div class="player-info">
         <div class="player-name" id="playername2">Yanek</div>
         <div class="player-score" id="score2">0 Punkte</div>
+        <div class="score-adjust-container">
+          <button onclick="adjustScore('player2', 1)" class="smallfix-button">+</button>
+          <button onclick="adjustScore('player2', -1)" class="smallfix-button">-</button>
+        </div>
       </div>
     </div>
   </div>

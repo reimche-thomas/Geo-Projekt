@@ -384,3 +384,25 @@ function selectStartingPlayer() {
 window.onload = function () {
   selectStartingPlayer(); // Startspieler auswählen, wenn die Seite geladen ist
 };
+
+function adjustScore(player, value) {
+  if (player === "player1") {
+    score1 += value;
+    if (score1 < 0) score1 = 0; // Keine negativen Punkte
+    document.getElementById("score1").textContent = score1 + " Punkte";
+  } else if (player === "player2") {
+    score2 += value;
+    if (score2 < 0) score2 = 0;
+    document.getElementById("score2").textContent = score2 + " Punkte";
+  }
+
+  adjustRounds();
+}
+
+// Funktion zum Rundenanpassen
+function adjustRounds() {
+  // Beispiel: Runden neu berechnen, wenn du z.B. "totalRounds" hast
+  // Hier müsstest du anpassen, wie du deine Runden aktuell speicherst!
+  // totalRounds = player1Score + player2Score;
+  // document.getElementById("roundDisplay").textContent = "Runde: " + totalRounds;
+}
