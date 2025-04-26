@@ -1,20 +1,30 @@
 let round = 1;
 let score1 = 0;
 let score2 = 0;
-let currentBet = "";
+let currentBet = 0;
 let currentPlayer = "";
 let allEvents = [];
 let eventQueue = [];
+const maxValue = 5000;
 
 
 function submitBet() {
-  const betInput = document.getElementById("betInput");
-  currentBet = betInput.value.trim();
-  if (!currentBet) return alert("Bitte einen Bet eintragen!");
-  document.getElementById("currentBet").textContent = currentBet;
+  if (currentBet === 0) {
+    return alert("Bitte einen Bet eintragen!");
+  }
+
+  document.getElementById("currentBet").textContent = currentBet + " Münzen";
   document.getElementById("betDisplay").classList.remove("hidden");
-  betInput.value = "";
+
+  currentBet = 0;
+  document.getElementById("valueDisplay").textContent = currentBet;
+
+  // Buttons wieder aktivieren
+  document.getElementById("btn100").disabled = false;
+  document.getElementById("btn500").disabled = false;
+  document.getElementById("btn1000").disabled = false;
 }
+
 
 function assignBet() {
   const selector = document.getElementById("playerSelector");
@@ -188,3 +198,22 @@ function renderCountryDisplay(countries) {
   });
 }
 
+function increaseValue(amount) {
+  if (currentBet + amount <= maxValue) {
+    currentBet += amount;
+    document.getElementById("valueDisplay").textContent = currentBet;
+  }
+
+  // Prüfen und ggf. Buttons deaktivieren
+  if (currentBet >= maxValue) {
+    disableButtons();
+  }
+}
+
+
+
+function disableButtons() {
+  document.getElementById("btn100").disabled = true;
+  document.getElementById("btn500").disabled = true;
+  document.getElementById("btn1000").disabled = true;
+}
