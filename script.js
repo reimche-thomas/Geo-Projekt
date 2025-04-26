@@ -9,46 +9,114 @@ const maxValue = 5000;
 let currentPlayerTurn = "player1"; // Start bei Spieler 1
 let lastCalledValue = 0;
 let lastBetter = "player1";
+let lastBetAmount = 0;
+let player1Points = 0;
+let player2Points = 0;
 
 function submitBet() {
   if (lastCalledValue === 0) {
     return alert("Bitte einen Bet eintragen!");
   }
 
-  // Setze den letzten gesetzten Wert in die Anzeige
-  document.getElementById("currentBet").textContent = lastCalledValue + " Punkte";
-  document.getElementById("betDisplay").classList.remove("hidden");
+  // Spielbereich verstecken, Resolve-Bereich zeigen
+  document.getElementById("bettingArea").classList.add("hidden");
+  document.getElementById("resolveArea").classList.remove("hidden");
 
-  // Automatisch den letzten Spieler als Besitzer auswählen
-  document.getElementById("playerSelector").value = lastBetter;
+  // Text und Farbe anpassen
+  const betInfo = document.getElementById("betInfo");
+  betInfo.innerHTML = `<span style="color: ${lastBetter === "player1" ? "lightcoral" : "lightskyblue"};">${lastBetter === "player1" ? "Spieler 1" : "Spieler 2"}</span> hat ${lastBetAmount} Punkte gesetzt!<br>Hat der Spieler den Bet bekommen?`;
 
-  // Reset für neues Bieten
+  // Buttons wieder aktivierbar machen
+  document.getElementById("btn100").disabled = false;
+  document.getElementById("btn500").disabled = false;
+  document.getElementById("btn1000").disabled = false;
+
+  // Werte zurücksetzen
   currentBet = 0;
   lastCalledValue = 0;
   document.getElementById("valueDisplay").textContent = currentBet;
+}
 
-  // Buttons wieder aktivieren
+
+function submitCall() {
+  const betDisplay = document.getElementById("valueDisplay");
+  lastCalledValue = currentBet;
+  lastBetAmount = currentBet;
+
+  if (currentPlayerTurn === "player1") {
+    betDisplay.style.color = "lightcoral";
+    lastBetter = "player1";
+  } else {
+    betDisplay.style.color = "lightskyblue";
+    lastBetter = "player2";
+  }
+
+  changePlayer();
+}
+
+function resolveBet(success) {
+  // Erfolg oder Misserfolg? Nur 1 Punkt verteilen, egal wie hoch der Bet war
+  if (success) {
+    // Erfolgreicher Bet - Nur 1 Punkt für den Spieler, der den Bet abgegeben hat
+    if (lastBetter === "player1") {
+      player1Points += 1;  // Nur 1 Punkt hinzufügen
+      document.getElementById("score1").textContent = player1Points + " Punkte";
+    } else {
+      player2Points += 1;  // Nur 1 Punkt hinzufügen
+      document.getElementById("score2").textContent = player2Points + " Punkte";
+    }
+  } else {
+    // Misserfolgreicher Bet - Der andere Spieler bekommt den Punkt
+    if (lastBetter === "player1") {
+      player2Points += 1;  // Nur 1 Punkt für den anderen Spieler
+      document.getElementById("score2").textContent = player2Points + " Punkte";
+    } else {
+      player1Points += 1;  // Nur 1 Punkt für den anderen Spieler
+      document.getElementById("score1").textContent = player1Points + " Punkte";
+    }
+  }
+
+  // --- Jetzt das GUI zurücksetzen ---
+
+  // 1. "Bet Auflösung" (resolveArea) ausblenden
+  document.getElementById("resolveArea").classList.add("hidden");
+
+  // 2. Normale Mitte (bettingArea) wieder einblenden
+  document.getElementById("bettingArea").classList.remove("hidden");
+
+  // 3. Werte zurücksetzen (optional, falls du mit diesen Zahlen weiterarbeiten willst)
+  document.getElementById("valueDisplay").textContent = "0";  // Setzt den Wert zurück
+  lastBetAmount = 0;
+  lastCalledValue = 0;
+  currentBet = 0;
+
+  // 4. Runde hochzählen
+  let roundElem = document.getElementById("round");
+  roundElem.textContent = parseInt(roundElem.textContent) + 1;
+
+  // 5. Optional: BlindCountryContainer oder EventContainer aufräumen
+  document.getElementById("blindCountryContainer").classList.add("hidden");
+  document.getElementById("eventContainer").innerHTML = "";
+
+  // 6. Zurücksetzen der Wett-Buttons (optional)
   document.getElementById("btn100").disabled = false;
   document.getElementById("btn500").disabled = false;
   document.getElementById("btn1000").disabled = false;
 }
 
-function submitCall() {
-  // Wechsel der Spielerfarbe und Spielerstatus
-  const betDisplay = document.getElementById("valueDisplay");
-  lastCalledValue = currentBet; // Achtung: hier korrigiert
 
-  // Farbe des Bets je nach Spieler ändern
-  if (currentPlayerTurn === "player1") {
-    betDisplay.style.color = "lightcoral"; // Pastellrot
-    lastBetter = "player1"; // Merken, dass Spieler 1 zuletzt gesetzt hat
-  } else {
-    betDisplay.style.color = "lightskyblue"; // Pastellblau
-    lastBetter = "player2"; // Merken, dass Spieler 2 zuletzt gesetzt hat
-  }
 
-  changePlayer();
+// Funktion, um eine neue Runde zu starten
+function startNewRound() {
+  // Runde erhöhen
+  let roundElem = document.getElementById("round");
+  roundElem.textContent = parseInt(roundElem.textContent) + 1;
+
+  // Eventrolle neu starten, Werte resetten, etc. (Hier kannst du noch eigene Funktionen einfügen)
+  document.getElementById("blindCountryContainer").classList.add("hidden");
+  document.getElementById("eventContainer").innerHTML = "";  // Beispiel: Event-Inhalt zurücksetzen
 }
+
 
 function decreaseValue(amount) {
   const newBet = currentBet - amount;
@@ -94,33 +162,6 @@ function assignBet() {
   document.getElementById("resolveSection").classList.remove("hidden");
 }
 
-function resolveBet(success) {
-  if (success) {
-    if (currentPlayer === "player1") {
-      score1++;
-      document.getElementById("score1").textContent = score1;
-    } else {
-      score2++;
-      document.getElementById("score2").textContent = score2;
-    }
-  } else {
-    // Gegner bekommt den Punkt
-    if (currentPlayer === "player1") {
-      score2++;
-      document.getElementById("score2").textContent = score2;
-    } else {
-      score1++;
-      document.getElementById("score1").textContent = score1;
-    }
-  }
-
-  round++;
-  document.getElementById("round").textContent = round;
-  document.getElementById("betDisplay").classList.add("hidden");
-  document.getElementById("resolveSection").classList.add("hidden");
-  currentBet = "";
-  currentPlayer = "";
-}
 
 function highlightCurrentPlayer() {
   const player1Card = document.getElementById("player1Card");

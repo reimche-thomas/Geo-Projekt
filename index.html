@@ -23,55 +23,50 @@
     </div>
   </div>
 
-  <!-- Mitte: Spielbereich -->
   <div class="center-area">
     <h2>Runde <span id="round">1</span></h2>
 
-    <div class="event-roller">
-      <h3>Event dieser Runde:</h3>
-      <div id="eventContainer" class="event-container"></div>
-      <div id="blindCountryContainer" class="hidden" style="margin-top: 2rem;">
-        <div style="font-weight: bold; margin-bottom: 0.5rem;">🌍 Blind Bet: Land wird gewählt...</div>
-        <div id="countrySlot" style="display: flex; gap: 10px; justify-content: center;"></div>
+    <!-- Normaler Spielbereich -->
+    <div id="bettingArea">
+      <div class="event-roller">
+        <h3>Event dieser Runde:</h3>
+        <div id="eventContainer" class="event-container"></div>
+        <div id="blindCountryContainer" class="hidden" style="margin-top: 2rem;">
+          <div style="font-weight: bold; margin-bottom: 0.5rem;">🌍 Blind Bet: Land wird gewählt...</div>
+          <div id="countrySlot" style="display: flex; gap: 10px; justify-content: center;"></div>
+        </div>
+        <button onclick="startEventRoll()">EVENT ROLLEN 🎲</button>
       </div>
-      <button onclick="startEventRoll()">EVENT ROLLEN 🎲</button>
+
+      <div class="highest-bet">
+        <label>Highest Bet:</label>
+        <div id="valueDisplay" class="bet-display">0</div>
+        <button id="btn100" onclick="increaseValue(100)">+ 100</button>
+        <button id="btn500" onclick="increaseValue(500)">+ 500</button>
+        <button id="btn1000" onclick="increaseValue(1000)">+ 1000</button>
+      </div>
+      <div>
+        <button id="btnm100" onclick="decreaseValue(100)" class="buttonred">- 100</button>
+        <button id="btnm500" onclick="decreaseValue(500)" class="buttonred">- 500</button>
+        <button id="btnm1000" onclick="decreaseValue(1000)" class="buttonred">- 1000</button>
+      </div>
+      <div>
+        <button onclick="submitCall()">SUBMIT</button>
+        <button class="buttonred" onclick="submitBet()">PASS</button>
+      </div>
     </div>
 
-    <div class="highest-bet">
-      <label>Highest Bet:</label>
-      <div id="valueDisplay" class="bet-display">0</div>
-      <button id="btn100" onclick="increaseValue(100)">+ 100</button>
-      <button id="btn500" onclick="increaseValue(500)">+ 500</button>
-      <button id="btn1000" onclick="increaseValue(1000)">+ 1000</button>
-    </div>
-    <div>
-      <button id="btnm100" onclick="decreaseValue(100)" class="buttonred">- 100</button>
-      <button id="btnm500" onclick="decreaseValue(500)" class="buttonred">- 500</button>
-      <button id="btnm1000" onclick="decreaseValue(1000)" class="buttonred">- 1000</button>
-    </div>
-    <div>
-      <button onclick="submitCall()">SUBMIT</button>
-      <button class="buttonred" onclick="submitBet()">PASS</button>
-    </div>
-
-
-
-    <div id="betDisplay" class="hidden">
-      <p>Bet: <strong id="currentBet"></strong></p>
-      <label>Wer hat den Bet gemacht?</label>
-      <select id="playerSelector">
-        <option value="player1">Spieler 1</option>
-        <option value="player2">Spieler 2</option>
-      </select>
-      <button onclick="assignBet()">Zuweisen</button>
-    </div>
-
-    <div id="resolveSection" class="hidden">
-      <p>Hat der Spieler den Bet bekommen?</p>
-      <button onclick="resolveBet(true)">Ja</button>
-      <button onclick="resolveBet(false)">Nein</button>
+    <!-- Bereich, der beim PASS angezeigt wird -->
+    <div id="resolveArea" class="hidden">
+      <h3>Bet Auflösung:</h3>
+      <p id="betInfo"></p>
+      <div class="button-container" style="margin-top: 1rem;">
+        <button class="buttonred" onclick="resolveBet(true)">✅ Ja</button>
+        <button class="buttonred" onclick="resolveBet(false)">❌ Nein</button>
+      </div>
     </div>
   </div>
+
 
   <!-- Spieler 2 -->
   <div class="player-side">
