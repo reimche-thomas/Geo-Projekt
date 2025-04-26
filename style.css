@@ -747,9 +747,9 @@ body {
   display: flex;
   justify-content: center;
   /* Zentriert die Buttons horizontal */
-  gap: 20px;
+  gap: 25px;
   /* Abstand zwischen den beiden Buttons */
-  margin-top: 1rem;
+  margin-top: 1.4rem;
   /* Abstand nach oben zu den anderen Buttons */
 }
 
