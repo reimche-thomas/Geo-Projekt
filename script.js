@@ -354,3 +354,33 @@ function disableButtons() {
   document.getElementById("btn500").disabled = true;
   document.getElementById("btn1000").disabled = true;
 }
+
+function selectStartingPlayer() {
+  // Zufällig einen Startspieler auswählen
+  const startingPlayer = Math.random() < 0.5 ? "player1" : "player2";
+
+  // Entferne alle bisherigen Glow-Effekte
+  document.getElementById("player1Card").classList.remove("active-turn-player1", "active-turn-player2");
+  document.getElementById("player2Card").classList.remove("active-turn-player1", "active-turn-player2");
+
+  // Setze den Glow nur für den zufällig ausgewählten Startspieler
+  if (startingPlayer === "player1") {
+    document.getElementById("player1Card").classList.add("active-turn-player1");
+    document.documentElement.style.setProperty('--glow-color', 'lightskyblue');
+  } else {
+    document.getElementById("player2Card").classList.add("active-turn-player2");
+    document.documentElement.style.setProperty('--glow-color', 'lightcoral');
+  }
+
+  // Setze den aktuellen Spieler für den Spielablauf
+  currentPlayerTurn = startingPlayer;
+
+  // Optional: Anzeige, welcher Spieler dran ist
+  const playerDisplay = document.getElementById("playerDisplay");
+  playerDisplay.textContent = currentPlayerTurn === "player1" ? "Spieler 1 ist dran" : "Spieler 2 ist dran";
+}
+
+// Automatisches Ausführen beim Laden der Seite
+window.onload = function () {
+  selectStartingPlayer(); // Startspieler auswählen, wenn die Seite geladen ist
+};
