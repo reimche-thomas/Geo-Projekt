@@ -10,8 +10,6 @@ let currentPlayerTurn = "player1"; // Start bei Spieler 1
 let lastCalledValue = 0;
 let lastBetter = "player1";
 let lastBetAmount = 0;
-let player1Points = 0;
-let player2Points = 0;
 let player1name = document.getElementById("playername1").textContent;
 let player2name = document.getElementById("playername2").textContent;
 
@@ -69,20 +67,20 @@ function resolveBet(success) {
   if (success) {
     // Erfolgreicher Bet - Nur 1 Punkt für den Spieler, der den Bet abgegeben hat
     if (lastBetter === "player1") {
-      player1Points += 1;  // Nur 1 Punkt hinzufügen
-      document.getElementById("score1").textContent = player1Points + " Punkte";
+      score1 += 1;  // Nur 1 Punkt hinzufügen
+      document.getElementById("score1").textContent = score1 + " Punkte";
     } else {
-      player2Points += 1;  // Nur 1 Punkt hinzufügen
-      document.getElementById("score2").textContent = player2Points + " Punkte";
+      score2 += 1;  // Nur 1 Punkt hinzufügen
+      document.getElementById("score2").textContent = score2 + " Punkte";
     }
   } else {
     // Misserfolgreicher Bet - Der andere Spieler bekommt den Punkt
     if (lastBetter === "player1") {
-      player2Points += 1;  // Nur 1 Punkt für den anderen Spieler
-      document.getElementById("score2").textContent = player2Points + " Punkte";
+      score2 += 1;  // Nur 1 Punkt für den anderen Spieler
+      document.getElementById("score2").textContent = score2 + " Punkte";
     } else {
-      player1Points += 1;  // Nur 1 Punkt für den anderen Spieler
-      document.getElementById("score1").textContent = player1Points + " Punkte";
+      score1 += 1;  // Nur 1 Punkt für den anderen Spieler
+      document.getElementById("score1").textContent = score1 + " Punkte";
     }
   }
 
