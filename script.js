@@ -7,6 +7,7 @@ let allEvents = [];
 let eventQueue = [];
 const maxValue = 5000;
 let currentPlayerTurn = "player1"; // Start bei Spieler 1
+let lastCalledValue = 0;
 
 function submitBet() {
   if (currentBet === 0) {
@@ -28,6 +29,7 @@ function submitBet() {
 function submitCall() {
   // Wechsel der Spielerfarbe und Spielerstatus
   const betDisplay = document.getElementById("valueDisplay");
+  lastCalledValue = currentBet;
 
   // Farbe des Bets je nach Spieler ändern
   if (currentPlayerTurn === "player1") {
@@ -40,6 +42,18 @@ function submitCall() {
   changePlayer();
 }
 
+function decreaseValue(amount) {
+  const newBet = currentBet - amount;
+  if (newBet >= lastCalledValue) {
+    currentBet = newBet;
+    document.getElementById("valueDisplay").textContent = currentBet;
+  } else {
+    // Optional: kleine Warnung oder einfach nichts tun
+    console.log("Nicht möglich, unter den letzten Bet zu gehen!");
+  }
+}
+
+
 function changePlayer() {
   // Wechsel zwischen den Spielern
   currentPlayerTurn = currentPlayerTurn === "player1" ? "player2" : "player1";
@@ -48,7 +62,6 @@ function changePlayer() {
   const playerDisplay = document.getElementById("playerDisplay");
   playerDisplay.textContent = currentPlayerTurn === "player1" ? "Spieler 1 ist dran" : "Spieler 2 ist dran";
 }
-
 
 function assignBet() {
   const selector = document.getElementById("playerSelector");
@@ -126,8 +139,8 @@ function startEventRoll() {
     displayCount++;
     if (displayCount > 20) {
       clearInterval(rollInterval);
-      //const selectedEvent = currentDisplay[2];
-      const selectedEvent = "Blind Bet";
+      const selectedEvent = currentDisplay[2];
+      //const selectedEvent = "Blind Bet";
       console.log("Gewähltes Event:", selectedEvent);
 
       if (selectedEvent === "Blind Bet") {

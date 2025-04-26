@@ -25,7 +25,7 @@
 
   <!-- Mitte: Spielbereich -->
   <div class="center-area">
-    <h1>Runde <span id="round">1</span></h1>
+    <h2>Runde <span id="round">1</span></h2>
 
     <div class="event-roller">
       <h3>Event dieser Runde:</h3>
@@ -34,7 +34,7 @@
         <div style="font-weight: bold; margin-bottom: 0.5rem;">🌍 Blind Bet: Land wird gewählt...</div>
         <div id="countrySlot" style="display: flex; gap: 10px; justify-content: center;"></div>
       </div>
-      <button onclick="startEventRoll()" class="cssbuttons-io-button">EVENT ROLLEN 🎲</button>
+      <button onclick="startEventRoll()">EVENT ROLLEN 🎲</button>
     </div>
 
     <div class="highest-bet">
@@ -43,6 +43,11 @@
       <button id="btn100" onclick="increaseValue(100)">+ 100</button>
       <button id="btn500" onclick="increaseValue(500)">+ 500</button>
       <button id="btn1000" onclick="increaseValue(1000)">+ 1000</button>
+    </div>
+    <div>
+      <button id="btnm100" onclick="decreaseValue(100)" class="buttonred">- 100</button>
+      <button id="btnm500" onclick="decreaseValue(500)" class="buttonred">- 500</button>
+      <button id="btnm1000" onclick="decreaseValue(1000)" class="buttonred">- 1000</button>
     </div>
     <div>
       <button onclick="submitCall()">SUBMIT</button>

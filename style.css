@@ -38,6 +38,29 @@ body {
   font-family: "MeineSchrift", sans-serif;
 }
 
+.event-roller {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Zentriert alles horizontal */
+  gap: 10px;
+  /* Kleiner Abstand zwischen den Elementen */
+  margin-top: 10px;
+  /* Abstand nach oben zu „Runde 1“ */
+}
+
+.event-roller h3 {
+  margin: 0;
+  /* Kein extra Abstand oben/unten */
+}
+
+#eventContainer,
+#blindCountryContainer {
+  margin-top: 10px;
+  /* bisschen Luft unter dem Eventtext */
+}
+
+
 .center-area {
   width: 50%;
   padding: 30px;
