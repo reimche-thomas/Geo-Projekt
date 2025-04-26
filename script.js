@@ -40,6 +40,12 @@ function submitBet() {
 
 function submitCall() {
   const betDisplay = document.getElementById("valueDisplay");
+
+  if (currentBet <= lastCalledValue) {
+    alert("Dein Einsatz muss höher sein als der vorherige!");
+    return; // Abbrechen, nichts weiter tun
+  }
+
   lastCalledValue = currentBet;
   lastBetAmount = currentBet;
 
@@ -53,6 +59,7 @@ function submitCall() {
 
   changePlayer();
 }
+
 
 function resolveBet(success) {
   // Erfolg oder Misserfolg? Nur 1 Punkt verteilen, egal wie hoch der Bet war
@@ -120,7 +127,7 @@ function startNewRound() {
 
 function decreaseValue(amount) {
   const newBet = currentBet - amount;
-  if (newBet >= lastCalledValue) {
+  if (newBet > lastCalledValue) {
     currentBet = newBet;
     document.getElementById("valueDisplay").textContent = currentBet;
   } else {
