@@ -215,38 +215,32 @@ function startEventRoll() {
     return;
   }
 
-  // Kopiere und shuffle Events
   eventQueue = [...shuffleArray(allEvents)];
 
   let displayCount = 0;
   const rollInterval = setInterval(() => {
     if (eventQueue.length < 5) {
-      // Reshuffle bei Bedarf
       eventQueue = eventQueue.concat(shuffleArray(allEvents));
     }
 
-    // 1. Lösche die vorherigen Events im Event Container
     const container = document.getElementById("eventContainer");
     container.innerHTML = "";
 
-    // 2. Hol die 5 neuen Events für die Anzeige
     const currentDisplay = eventQueue.slice(0, 5);
 
-    // ➔ Jetzt mit Karten-Design
     currentDisplay.forEach((event, index) => {
       const eventElement = document.createElement("div");
-      eventElement.classList.add("card"); // Hier wird die Klasse "card" hinzugefügt
+      eventElement.classList.add("card");
       eventElement.textContent = event;
 
-      // Markiere das mittlere Event
       if (index === 2) {
-        eventElement.classList.add("selected");
+        eventElement.classList.add("center"); // <-- nur "center", NICHT zusätzlich "selected"
       }
 
       container.appendChild(eventElement);
     });
 
-    eventQueue.push(eventQueue.shift()); // Drehe die Queue
+    eventQueue.push(eventQueue.shift());
 
     displayCount++;
     if (displayCount > 20) {
@@ -266,6 +260,7 @@ function startEventRoll() {
     }
   }, 200);
 }
+
 
 
 
@@ -395,10 +390,6 @@ function selectStartingPlayer() {
 
   // Setze den aktuellen Spieler für den Spielablauf
   currentPlayerTurn = startingPlayer;
-
-  // Optional: Anzeige, welcher Spieler dran ist
-  const playerDisplay = document.getElementById("playerDisplay");
-  playerDisplay.textContent = currentPlayerTurn === "player1" ? "Spieler 1 ist dran" : "Spieler 2 ist dran";
 }
 
 // Automatisches Ausführen beim Laden der Seite
