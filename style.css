@@ -558,49 +558,6 @@ body {
 }
 
 /* From Uiverse.io by csozidev */
-/* glowing hover card made by: csozi | Website: english.csozi.hu*/
-
-.card {
-  position: relative;
-  width: 190px;
-  height: 60px;
-  background: rgb(255, 0, 179);
-  background: linear-gradient(137deg, rgb(255, 0, 179) 0%, rgba(0, 212, 255, 1) 100%);
-  transition: 0.3s ease;
-  border-radius: 30px;
-  filter: drop-shadow(0px 0px 30px rgba(209, 38, 197, 0.5));
-}
-
-.card::after {
-  content: '';
-  background-color: #181818;
-  position: absolute;
-  z-index: 1;
-  transition: 0.3s ease;
-  height: 98%;
-  width: 98%;
-  top: 1%;
-  left: 1%;
-  border-radius: 28px;
-}
-
-.card:hover {
-  filter: drop-shadow(0px 0px 30px rgba(209, 38, 197, 1));
-}
-
-@keyframes cardafter {
-  0% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
 
 /* From Uiverse.io by adamgiebl */
 .buttongreen {
@@ -891,4 +848,31 @@ body {
   /* weicher Schatten für edlen Look */
   backdrop-filter: blur(4px);
   /* leichtes Blur hinter dem Hintergrund */
+}
+
+.card {
+  background: rgba(0, 0, 0, 0.7);
+  /* dunkler transparenter Hintergrund */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  /* dezente helle Border */
+  border-radius: 15px;
+  /* schöne Abrundung */
+  padding: 20px;
+  width: 100px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+  /* weiche Umrandung */
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.2);
+  /* leichter Glow beim Hover */
+  transform: scale(1.03);
 }

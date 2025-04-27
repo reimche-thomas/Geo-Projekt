@@ -227,18 +227,25 @@ function startEventRoll() {
 
     // 1. Lösche die vorherigen Events im Event Container
     const container = document.getElementById("eventContainer");
-    container.innerHTML = ""; // Hier wird der alte Inhalt entfernt
+    container.innerHTML = "";
 
     // 2. Hol die 5 neuen Events für die Anzeige
     const currentDisplay = eventQueue.slice(0, 5);
-    renderEventDisplay(currentDisplay);
+
+    // ➔ Jetzt mit Karten-Design
+    currentDisplay.forEach(event => {
+      const eventElement = document.createElement("div");
+      eventElement.classList.add("card"); // Hier wird die Klasse "card" hinzugefügt
+      eventElement.textContent = event;
+      container.appendChild(eventElement);
+    });
+
     eventQueue.push(eventQueue.shift()); // Drehe die Queue
 
     displayCount++;
     if (displayCount > 20) {
       clearInterval(rollInterval);
       const selectedEvent = currentDisplay[2];
-      //const selectedEvent = "Blind Bet";
       console.log("Gewähltes Event:", selectedEvent);
 
       if (selectedEvent === "Blind Bet") {
@@ -246,15 +253,15 @@ function startEventRoll() {
       } else {
         document.getElementById("blindCountryContainer").classList.add("hidden");
         document.getElementById("blindCountryContainer").innerHTML = `
-              <div style="font-weight: bold; margin-bottom: 0.5rem;">🌍 Blind Bet: Land wird gewählt...</div>
-              <div id="countrySlot" style="display: flex; gap: 10px; justify-content: center;"></div>
-            `;
+          <div style="font-weight: bold; margin-bottom: 0.5rem;">🌍 Blind Bet: Land wird gewählt...</div>
+          <div id="countrySlot" style="display: flex; gap: 10px; justify-content: center;"></div>
+        `;
       }
-
     }
 
   }, 200);
 }
+
 
 function renderEventDisplay(events) {
   const container = document.getElementById("eventContainer");
