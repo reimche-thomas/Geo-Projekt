@@ -1,13 +1,12 @@
 [
-    "Blind Bet",
-    "Water Only",
-    "Black/White",
-    "Minuspunkt bei Verlust",
-    "Bluff erlaubt",
-    "Zwangswette",
-    "Geheime Karte",
-    "Punkteklau",
-    "Glückswurf",
-    "Joker einsetzen"
-  ]
-  
+  "BLIND BET",
+  "WATER ONLY",
+  "BLACK/WHITE",
+  "VERPIXELT",
+  "NPMZ",
+  "DRUNK MODE",
+  "INVERTIERT",
+  "NO MAP ZOOM",
+  "WRONG COUNTRY",
+  "A RURAL WORLD"
+]
