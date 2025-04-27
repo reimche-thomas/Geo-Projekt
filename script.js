@@ -233,10 +233,16 @@ function startEventRoll() {
     const currentDisplay = eventQueue.slice(0, 5);
 
     // ➔ Jetzt mit Karten-Design
-    currentDisplay.forEach(event => {
+    currentDisplay.forEach((event, index) => {
       const eventElement = document.createElement("div");
       eventElement.classList.add("card"); // Hier wird die Klasse "card" hinzugefügt
       eventElement.textContent = event;
+
+      // Markiere das mittlere Event
+      if (index === 2) {
+        eventElement.classList.add("selected");
+      }
+
       container.appendChild(eventElement);
     });
 
@@ -252,27 +258,35 @@ function startEventRoll() {
         handleBlindBetSlot();
       } else {
         document.getElementById("blindCountryContainer").classList.add("hidden");
-        document.getElementById("blindCountryContainer").innerHTML = `
+        document.getElementById("blindCountryContainer").innerHTML = ` 
           <div style="font-weight: bold; margin-bottom: 0.5rem;">🌍 Blind Bet: Land wird gewählt...</div>
           <div id="countrySlot" style="display: flex; gap: 10px; justify-content: center;"></div>
         `;
       }
     }
-
   }, 200);
 }
 
 
+
 function renderEventDisplay(events) {
   const container = document.getElementById("eventContainer");
+
+  // Lösche alle alten Karten
   container.innerHTML = "";
 
-  events.forEach((eventText, index) => {
-    const div = document.createElement("div");
-    div.classList.add("event", "card");
-    if (index === 2) div.classList.add("center"); // mittleres Event
-    div.textContent = eventText;
-    container.appendChild(div);
+  // Durchlaufe alle Events und rendere sie als Karte
+  events.forEach((event, index) => {
+    const card = document.createElement("div");
+    card.classList.add("card"); // Alle Karten bekommen die Grundklasse "card"
+    card.textContent = event;
+
+    // Das mittlere Event wird mit der Klasse "center" markiert
+    if (index === 2) { // Das mittlere Event (Index 2)
+      card.classList.add("selected", "center"); // Markiert es als ausgewählt und zentriert
+    }
+
+    container.appendChild(card);
   });
 }
 

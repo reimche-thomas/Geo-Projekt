@@ -851,16 +851,23 @@ body {
   /* leichtes Blur hinter dem Hintergrund */
 }
 
+.event-container {
+  display: flex;
+  justify-content: center;
+  /* Zentriert die Karten horizontal */
+  gap: 10px;
+  /* Abstand zwischen den Karten */
+  align-items: center;
+  /* Vertikal zentrieren */
+}
+
 .card {
   background: rgba(40, 40, 60, 0.3);
-  /* Leicht blauer/lila Touch, sehr subtil */
   border: 1px solid rgba(70, 70, 100, 0.3);
-  /* Dezente Umrandung mit Blau/Lila Touch */
   border-radius: 15px;
   padding: 15px 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6), inset 0 0 10px rgba(40, 40, 60, 0.3);
   color: #e0e0e0;
-  /* Klare, gut lesbare Schrift ohne Transparenz */
   font-size: 1.2rem;
   text-align: center;
   max-width: 130px;
@@ -868,8 +875,22 @@ body {
   user-select: none;
 }
 
-.card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(40, 40, 60, 0.5);
-  /* Etwas intensiverer Lila-Touch beim Hover */
+/* Mittlere Karte hervorheben */
+.card.selected {
+  transform: scale(1.3);
+  /* Vergrößert das mittlere Element */
+  box-shadow: 0 0 20px rgba(40, 40, 60, 0.6), 0 0 10px rgba(0, 0, 0, 0.6);
+  /* Leicht intensiverer Schatten */
+  background: rgba(50, 50, 70, 0.6);
+  /* Stärkerer Hintergrund für das mittlere Element */
+}
+
+/* Wenn die Karte in der Mitte ist, sie visuell hervorheben */
+.card.center {
+  border: 3px solid lightcoral;
+  /* Oder eine andere Farbe, um die Karte hervorzuheben */
+  transform: scale(1.2);
+  /* Leicht vergrößert */
+  background: rgba(50, 50, 70, 0.7);
+  /* Deutlich stärkerer Hintergrund */
 }
