@@ -23,6 +23,7 @@ function submitBet() {
   document.getElementById("resolveArea").classList.remove("hidden");
   document.getElementById("resolveArea").classList.add("eventcard");
   document.getElementById("resolveArea").classList.add("resolve-area");
+  document.getElementById("roundtitle").classList.add("hidden");
 
   // Text und Farbe anpassen
   const betInfo = document.getElementById("betInfo");
@@ -93,6 +94,7 @@ function resolveBet(success) {
 
   // 2. Normale Mitte (bettingArea) wieder einblenden
   document.getElementById("bettingArea").classList.remove("hidden");
+  document.getElementById("roundtitle").classList.remove("hidden");
 
   // 3. Werte zurücksetzen (optional, falls du mit diesen Zahlen weiterarbeiten willst)
   document.getElementById("valueDisplay").textContent = "0";  // Setzt den Wert zurück
