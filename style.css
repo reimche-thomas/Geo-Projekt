@@ -133,6 +133,7 @@ body {
   gap: 10px;
   margin: 20px 0;
   height: 150px;
+  width: 105%;
   overflow: hidden;
 }
 
@@ -862,7 +863,7 @@ body {
   /* Klare, gut lesbare Schrift ohne Transparenz */
   font-size: 1.2rem;
   text-align: center;
-  min-width: 120px;
+  max-width: 130px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   user-select: none;
 }
