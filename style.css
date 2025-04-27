@@ -868,7 +868,7 @@ body {
   color: #e0e0e0;
   font-size: 1rem;
   text-align: center;
-  width: 110px;
+  width: 90px;
   /* Fixe Breite für ALLE Karten */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   user-select: none;
@@ -887,4 +887,5 @@ body {
   transform: scale(1.5);
   background: rgba(50, 50, 70, 0.9);
   z-index: 10;
+  margin: 0 40px;
 }
