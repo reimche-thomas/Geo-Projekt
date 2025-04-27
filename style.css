@@ -62,6 +62,7 @@ body {
 
 
 .center-area {
+  position: relative;
   width: 100%;
   max-width: 1200px;
   /* Maximale Breite für den Container */
@@ -247,6 +248,7 @@ body {
   position: relative;
   transition: box-shadow 0.3s ease;
   transform: translateY(5%);
+  margin-top: -50px;
 }
 
 /* Normales Styling bleibt */
@@ -873,19 +875,20 @@ body {
 }
 
 .round-display {
-  position: fixed;
-  /* Fixiert das Element relativ zum Viewport */
-  top: 120px;
-  /* Setzt es 20px vom oberen Rand des Bildschirms */
-  left: 50%;
-  /* Zentriert es horizontal */
-  transform: translateX(-50%);
-  /* Kompensiert die Verschiebung beim Zentrieren */
-  font-size: 1.5rem;
+  font-size: 2rem;
+  margin-top: -50px;
+  margin-bottom: 20px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.5);
+  /* leicht transparenter schwarzer Hintergrund */
+  padding: 10px 20px;
+  /* Platz innen */
+  border-radius: 12px;
+  /* abgerundete Ecken */
   color: white;
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 10px;
-  border-radius: 10px;
-  z-index: 1000;
-  /* Stellt sicher, dass es immer oben ist */
+  /* Schrift schön weiß */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  /* weicher Schatten für edlen Look */
+  backdrop-filter: blur(4px);
+  /* leichtes Blur hinter dem Hintergrund */
 }
