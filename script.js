@@ -5,6 +5,7 @@ let currentBet = 0;
 let currentPlayer = "";
 let allEvents = [];
 let eventQueue = [];
+let countries = [];
 const maxValue = 5000;
 let currentPlayerTurn = "player1"; // Start bei Spieler 1
 let lastCalledValue = 0;
@@ -12,6 +13,7 @@ let lastBetter = "player1";
 let lastBetAmount = 0;
 let player1name = document.getElementById("playername1").textContent;
 let player2name = document.getElementById("playername2").textContent;
+let blindstart = 8;
 
 function submitBet() {
   if (lastCalledValue === 0) {
@@ -211,18 +213,50 @@ function shuffleArray(array) {
     .map(({ value }) => value);
 }
 
+function loadCountries() {
+  fetch('countries.json')
+    .then(response => response.json())  // Wir parsen die JSON-Antwort
+    .then(data => {
+      countries = data;  // Speichern der Länder in einer Variablen
+    })
+    .catch(error => {
+      console.error('Fehler beim Laden der Länder:', error);
+    });
+}
+
+// Aufruf der Funktion zum Laden der Länder, wenn die Seite geladen wird
+loadCountries();
+
+// Die startEventRoll Funktion
 function startEventRoll() {
-  if (allEvents.length < 5) {
-    alert("Nicht genug Events zum Rollen!");
+  if (allEvents.length < 5 && countries.length < 1) {
+    alert("Nicht genug Events oder Länder zum Rollen!");
     return;
   }
 
-  eventQueue = [...shuffleArray(allEvents)];
+  // Ab Runde 8 sollen wir Länder anstatt Events rollt
+  const roundElem = document.getElementById("round");
+  const currentRound = parseInt(roundElem.textContent);
+
+  // Wählen wir aus, ob wir Events oder Länder verwenden
+  let itemsToDisplay = [];
+
+  if (currentRound >= blindstart) {
+    // Ab Runde 8 Blind Bet, daher landen wir auf Ländern
+    document.getElementById("roundTitle").textContent = "BLIND BET COUNTRY"; // Ändere den Titel
+    itemsToDisplay = shuffleArray(countries).slice(0, 5); // Mische die Länder und nimm die ersten 5
+  } else {
+    // Sonst, normale Events anzeigen
+    itemsToDisplay = shuffleArray(allEvents).slice(0, 5); // Mische die Events und nimm die ersten 5
+  }
+
+  eventQueue = [...itemsToDisplay];  // Setze die Queue mit den passenden Items
 
   let displayCount = 0;
   const rollInterval = setInterval(() => {
     if (eventQueue.length < 5) {
-      eventQueue = eventQueue.concat(shuffleArray(allEvents));
+      // Reshuffle bei Bedarf
+      eventQueue = eventQueue.concat(itemsToDisplay);
     }
 
     const container = document.getElementById("eventContainer");
@@ -236,22 +270,24 @@ function startEventRoll() {
       eventElement.textContent = event;
 
       if (index === 2) {
-        eventElement.classList.add("center"); // <-- nur "center", NICHT zusätzlich "selected"
+        eventElement.classList.add("center"); // Markiert die mittlere Karte
       }
 
       container.appendChild(eventElement);
     });
 
-    eventQueue.push(eventQueue.shift());
+    eventQueue.push(eventQueue.shift()); // Dreht die Queue für die nächste Iteration
 
     displayCount++;
     if (displayCount > 20) {
       clearInterval(rollInterval);
+
       const selectedEvent = currentDisplay[2];
       console.log("Gewähltes Event:", selectedEvent);
 
-      if (selectedEvent === "Blind Bet") {
-        handleBlindBetSlot();
+      if (currentRound >= blindstart) {
+        // Wenn es ein Blind Bet ist, zeige das Land an
+        handleBlindBetSlot(selectedEvent);
       } else {
         document.getElementById("blindCountryContainer").classList.add("hidden");
         document.getElementById("blindCountryContainer").innerHTML = ` 
@@ -262,9 +298,6 @@ function startEventRoll() {
     }
   }, 200);
 }
-
-
-
 
 function renderEventDisplay(events) {
   const container = document.getElementById("eventContainer");
@@ -288,54 +321,16 @@ function renderEventDisplay(events) {
 }
 
 // Zufälliges Land anzeigen bei Blind Bet
-function handleBlindBetSlot() {
-  fetch('countries.json')
-    .then(res => res.json())
-    .then(countryData => {
-      if (countryData.length < 5) {
-        alert("Nicht genug Länder für Blind Bet!");
-        return;
-      }
+function handleBlindBetSlot(country) {
+  // Hier kannst du dein Blind Bet mit dem Land (country) behandeln
+  console.log("Blind Bet Country ausgewählt:", country);
 
-      const shuffledCountries = shuffleArray(countryData);
-      let queue = [...shuffledCountries];
-      let count = 0;
+  // Beispiel: Land im Container anzeigen
+  const countrySlot = document.getElementById("countrySlot");
+  countrySlot.textContent = country;
 
-      document.getElementById("blindCountryContainer").classList.remove("hidden");
-
-      const interval = setInterval(() => {
-        if (queue.length < 5) {
-          queue = queue.concat(shuffleArray(countryData));
-        }
-
-        const visible = queue.slice(0, 5);
-        renderCountryDisplay(visible);
-        queue.push(queue.shift()); // rotate
-
-        count++;
-        if (count > 20) {
-          clearInterval(interval);
-
-          const previousResult = document.querySelector("#blindCountryContainer .result");
-          if (previousResult) {
-            previousResult.remove(); // Entfernt das vorherige Land
-          }
-
-          const selectedCountry = visible[2];
-          console.log("🎯 Ausgewähltes Land:", selectedCountry);
-
-          const result = document.createElement("div");
-          result.style.marginTop = "1rem";
-          result.style.fontWeight = "bold";
-          result.style.color = "#007700";
-          result.style.fontSize = "1.1em";
-          result.classList.add("result"); // Klasse hinzufügen, damit es leichter entfernt werden kann
-          result.textContent = `🌐 Ausgewähltes Land: ${selectedCountry}`;
-          document.getElementById("blindCountryContainer").appendChild(result);
-        }
-      }, 200);
-    })
-    .catch(err => console.error("Fehler beim Laden der Länder:", err));
+  // Optional kannst du den bet-container hier verstecken und was anderes anzeigen.
+  document.getElementById("blindCountryContainer").classList.remove("hidden");
 }
 
 function renderCountryDisplay(countries) {
@@ -417,5 +412,9 @@ function adjustScore(player, value) {
 function adjustRounds() {
   const totalScore = score1 + score2;
   document.getElementById("round").textContent = totalScore + 1; // Anzeige aktualisieren
-
+  if ((totalScore + 1) < blindstart) {
+    document.getElementById("roundTitle").textContent = "EVENT DIESER RUNDE";
+  } else {
+    document.getElementById("roundTitle").textContent = "BLIND BET COUNTRY";
+  }
 }
