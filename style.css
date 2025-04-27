@@ -851,28 +851,24 @@ body {
 }
 
 .card {
-  background: rgba(0, 0, 0, 0.7);
-  /* dunkler transparenter Hintergrund */
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  /* dezente helle Border */
+  background: rgba(40, 40, 60, 0.3);
+  /* Leicht blauer/lila Touch, sehr subtil */
+  border: 1px solid rgba(70, 70, 100, 0.3);
+  /* Dezente Umrandung mit Blau/Lila Touch */
   border-radius: 15px;
-  /* schöne Abrundung */
-  padding: 20px;
-  width: 100px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  color: white;
-  text-shadow: 1px 1px 2px black;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
-  /* weiche Umrandung */
-  transition: all 0.3s ease;
+  padding: 15px 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6), inset 0 0 10px rgba(40, 40, 60, 0.3);
+  color: #e0e0e0;
+  /* Klare, gut lesbare Schrift ohne Transparenz */
+  font-size: 1.2rem;
+  text-align: center;
+  min-width: 120px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
 }
 
 .card:hover {
-  box-shadow: 0 0 18px rgba(255, 255, 255, 0.2);
-  /* leichter Glow beim Hover */
-  transform: scale(1.03);
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(40, 40, 60, 0.5);
+  /* Etwas intensiverer Lila-Touch beim Hover */
 }
