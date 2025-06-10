@@ -446,3 +446,7 @@ document.getElementById('settingsModal').addEventListener('click', (event) => {
     document.body.classList.remove('settings-active');
   }
 });
+
+document.getElementById('exitSettings').addEventListener('click', () => {
+  document.body.classList.remove('settings-active');
+});

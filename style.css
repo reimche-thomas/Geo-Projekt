@@ -422,11 +422,13 @@ body {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  background-color: rgb(129, 110, 216);
+  background-color: rgba(50, 50, 50, 0.5);
+  /* Darker background with 50% transparency */
   border-radius: 10px;
   cursor: pointer;
   border: none;
-  box-shadow: 0px 0px 0px 2px rgb(212, 209, 255);
+  box-shadow: 0px 0px 0px 2px rgba(100, 100, 100, 0.5);
+  /* Subtle border shadow */
   z-index: 1000;
   /* optional: sorgt dafür, dass der Button über anderen Elementen liegt */
 }
@@ -901,6 +903,8 @@ body {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
   display: none;
   /* Initially hidden */
+  margin-top: 100px;
+  /* Added more spacing from the top */
 }
 
 body.settings-active .main-layout,
@@ -912,4 +916,31 @@ body.settings-active .setting-btn {
 body.settings-active #settingsModal {
   display: block;
   /* Show the settings modal */
+}
+
+#opponentSelect {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 16px;
+  text-shadow: 1px 1px 2px black;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+#opponentSelect:hover {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+#opponentSelect option {
+  background: rgba(0, 0, 0, 0.8);
+  /* Darker background for dropdown options */
+  color: white;
+  /* White text for options */
+  padding: 5px;
+  border-radius: 5px;
 }
