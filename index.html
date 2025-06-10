@@ -8,92 +8,108 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 
-<div class="main-layout">
-  <!-- Spieler 1 -->
-  <div class="player-side">
-    <div class="player-card-vertical" id="player1Card">
-      <div class="player-images">
-        <img src="sources/snupi_idle.gif" alt="Spieler 1" style="width: 350px; height: auto;">
-        <img src="sources/champion.png" alt="Champion" width="120" height="120" class="champion-img2">
-      </div>
-      <div class="player-info">
-        <div class="player-name" id="playername1">Snupi</div>
-        <div class="player-score" id="score1">0 Punkte</div>
-        <div class="score-adjust-container">
-          <button onclick="adjustScore('player1', -1)" class="smallfix-button">-</button>
-          <button onclick="adjustScore('player1', 1)" class="smallfix-button">+</button>
-        </div>
-      </div>
-    </div>
+<body>
+  <div class="setting-btn">
+    <div class="bar bar1"></div>
+    <div class="bar bar2"></div>
   </div>
 
-  <div class="center-area">
-    <h2 class="round-display" id="roundtitle">Runde <span id="round">1</span></h2>
-
-    <!-- Normaler Spielbereich -->
-    <div id="bettingArea">
-      <div class="eventcard" id="eventcard">
-        <h3 id="roundTitle">EVENT DIESER RUNDE</h3>
-        <div id="eventContainer" class="event-container"></div>
-        <button onclick="startEventRoll()" class="buttongreen">EVENT ROLLEN 🎲</button>
-      </div>
-
-      <div class="betting-area">
-        <div class="highest-bet">
-          <label>Highest Bet</label>
-          <div id="valueDisplay" class="bet-display">0</div>
+  <div class="main-layout">
+    <!-- Spieler 1 -->
+    <div class="player-side">
+      <div class="player-card-vertical" id="player1Card">
+        <div class="player-images">
+          <img src="sources/snupi_idle.gif" alt="Spieler 1" style="width: 350px; height: auto;">
+          <img src="sources/champion.png" alt="Champion" width="120" height="120" class="champion-img2">
         </div>
-        <div class="centered-container">
-          <div>
-            <button id="btn100" onclick="increaseValue(100)" class="buttongreen">+ 100</button>
-            <button id="btn500" onclick="increaseValue(500)" class="buttongreen">+ 500</button>
-            <button id="btn1000" onclick="increaseValue(1000)" class="buttongreen">+ 1000</button>
-          </div>
-          <div>
-            <button id="btnm100" onclick="decreaseValue(1000)" class="buttonred">- 1000</button>
-            <button id="btnm500" onclick="decreaseValue(500)" class="buttonred">- 500</button>
-            <button id="btnm1000" onclick="decreaseValue(100)" class="buttonred">- 100</button>
+        <div class="player-info">
+          <div class="player-name" id="playername1">Snupi</div>
+          <div class="player-score" id="score1">0 Punkte</div>
+          <div class="score-adjust-container">
+            <button onclick="adjustScore('player1', -1)" class="smallfix-button">-</button>
+            <button onclick="adjustScore('player1', 1)" class="smallfix-button">+</button>
           </div>
         </div>
-        <div class="submit-button-container">
-          <button onclick="submitCall()" style="width: 160px;" class="buttongreen">SUBMIT</button>
-          <button class="buttonred" onclick="submitBet()" style="width: 160px;">PASS</button>
+      </div>
+    </div>
+
+    <div class="center-area">
+      <h2 class="round-display" id="roundtitle">Runde <span id="round">1</span></h2>
+
+      <!-- Normaler Spielbereich -->
+      <div id="bettingArea">
+        <div class="eventcard" id="eventcard">
+          <h3 id="roundTitle">EVENT DIESER RUNDE</h3>
+          <div id="eventContainer" class="event-container"></div>
+          <button onclick="startEventRoll()" class="buttongreen">EVENT ROLLEN 🎲</button>
+        </div>
+
+        <div class="betting-area">
+          <div class="highest-bet">
+            <label>Highest Bet</label>
+            <div id="valueDisplay" class="bet-display">0</div>
+          </div>
+          <div class="centered-container">
+            <div>
+              <button id="btn100" onclick="increaseValue(100)" class="buttongreen">+ 100</button>
+              <button id="btn500" onclick="increaseValue(500)" class="buttongreen">+ 500</button>
+              <button id="btn1000" onclick="increaseValue(1000)" class="buttongreen">+ 1000</button>
+            </div>
+            <div>
+              <button id="btnm100" onclick="decreaseValue(1000)" class="buttonred">- 1000</button>
+              <button id="btnm500" onclick="decreaseValue(500)" class="buttonred">- 500</button>
+              <button id="btnm1000" onclick="decreaseValue(100)" class="buttonred">- 100</button>
+            </div>
+          </div>
+          <div class="submit-button-container">
+            <button onclick="submitCall()" style="width: 160px;" class="buttongreen">SUBMIT</button>
+            <button class="buttonred" onclick="submitBet()" style="width: 160px;">PASS</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bereich, der beim PASS angezeigt wird -->
+      <div id="resolveArea" class="hidden" style="width:600px;">
+        <h3>Bet Auflösung</h3>
+        <p id="betInfo"></p>
+        <div class="button-container" style="margin-top: 1rem;">
+          <button class="biggreenbutton" onclick="resolveBet(true)">✅ Ja</button>
+          <button class="bigbuttonred" onclick="resolveBet(false)">❌ Nein</button>
         </div>
       </div>
     </div>
 
-    <!-- Bereich, der beim PASS angezeigt wird -->
-    <div id="resolveArea" class="hidden" style="width:600px;">
-      <h3>Bet Auflösung</h3>
-      <p id="betInfo"></p>
-      <div class="button-container" style="margin-top: 1rem;">
-        <button class="biggreenbutton" onclick="resolveBet(true)">✅ Ja</button>
-        <button class="bigbuttonred" onclick="resolveBet(false)">❌ Nein</button>
-      </div>
-    </div>
-  </div>
 
-
-  <!-- Spieler 2 -->
-  <div class="player-side">
-    <div class="player-card-vertical" id="player2Card">
-      <div class="player-images">
-        <img src="sources/champion.png" alt="Champion" width="120" height="120" class="champion-img">
-        <img src="sources/yanek_idle.gif" alt="Spieler 2" style="width: 350px; height: auto;">
-      </div>
-      <div class="player-info">
-        <div class="player-name" id="playername2">Yanek</div>
-        <div class="player-score" id="score2">0 Punkte</div>
-        <div class="score-adjust-container">
-          <button onclick="adjustScore('player2', -1)" class="smallfix-button">-</button>
-          <button onclick="adjustScore('player2', 1)" class="smallfix-button">+</button>
+    <!-- Spieler 2 -->
+    <div class="player-side">
+      <div class="player-card-vertical" id="player2Card">
+        <div class="player-images">
+          <img src="sources/champion.png" alt="Champion" width="120" height="120" class="champion-img">
+          <img src="sources/yanek_idle.gif" alt="Spieler 2" style="width: 350px; height: auto;">
+        </div>
+        <div class="player-info">
+          <div class="player-name" id="playername2">Yanek</div>
+          <div class="player-score" id="score2">0 Punkte</div>
+          <div class="score-adjust-container">
+            <button onclick="adjustScore('player2', -1)" class="smallfix-button">-</button>
+            <button onclick="adjustScore('player2', 1)" class="smallfix-button">+</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<script src="script.js"></script>
+  <div id="settingsModal" class="hidden">
+    <h3>Einstellungen</h3>
+    <label for="opponentSelect">Gegner auswählen:</label>
+    <select id="opponentSelect">
+      <option value="yanek">Yanek</option>
+      <option value="lennli">Lennli</option>
+      <option value="kodiak">Kodiak</option>
+    </select>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 
 </html>

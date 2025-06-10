@@ -418,3 +418,31 @@ function adjustRounds() {
     document.getElementById("roundTitle").textContent = "BLIND BET COUNTRY";
   }
 }
+
+// Einstellungen-Button und Gegner-Auswahl
+document.querySelector('.setting-btn').addEventListener('click', () => {
+  document.body.classList.add('settings-active');
+});
+
+document.getElementById('opponentSelect').addEventListener('change', (event) => {
+  const selectedOpponent = event.target.value;
+  const opponentImage = document.querySelector('#player2Card img[alt="Spieler 2"]');
+  const opponentName = document.getElementById('playername2');
+
+  if (selectedOpponent === 'lennli') {
+    opponentImage.src = 'sources/lennli_idle.gif';
+    opponentName.textContent = 'Lennli';
+  } else if (selectedOpponent === 'kodiak') {
+    opponentImage.src = 'sources/kodiak_idle.gif';
+    opponentName.textContent = 'Kodiak';
+  } else {
+    opponentImage.src = 'sources/yanek_idle.gif';
+    opponentName.textContent = 'Yanek';
+  }
+});
+
+document.getElementById('settingsModal').addEventListener('click', (event) => {
+  if (event.target.id === 'settingsModal') {
+    document.body.classList.remove('settings-active');
+  }
+});
