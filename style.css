@@ -944,3 +944,22 @@ body.settings-active #settingsModal {
   padding: 5px;
   border-radius: 5px;
 }
+
+/* Add purple glow effect for the event roller */
+.glow-purple {
+  animation: glowPurple 1.5s infinite;
+}
+
+@keyframes glowPurple {
+
+  0%,
+  100% {
+    box-shadow: 0 0 12px 6px rgb(187, 86, 255);
+    /* Further reduced intensity */
+  }
+
+  50% {
+    box-shadow: 0 0 17px 12px rgb(187, 86, 255);
+    /* Further reduced intensity */
+  }
+}

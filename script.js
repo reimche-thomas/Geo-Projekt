@@ -13,6 +13,8 @@ let lastBetter = "player1";
 let lastBetAmount = 0;
 let player1name = document.getElementById("playername1").textContent;
 let player2name = document.getElementById("playername2").textContent;
+const player1Card = document.getElementById("player1Card");
+const player2Card = document.getElementById("player2Card");
 let blindstart = 8;
 let eventRepeatProbability = 0.5; // Wahrscheinlichkeit, dass ein Event erneut kommt (50%)
 
@@ -90,7 +92,7 @@ function resolveBet(success) {
     }
   }
 
-  // --- Jetzt das GUI zurücksetzen ---
+  // Reset des GUI
 
   // 1. "Bet Auflösung" (resolveArea) ausblenden
   document.getElementById("resolveArea").classList.add("hidden");
@@ -109,16 +111,20 @@ function resolveBet(success) {
   let roundElem = document.getElementById("round");
   roundElem.textContent = parseInt(roundElem.textContent) + 1;
 
-  // 5. Optional: BlindCountryContainer oder EventContainer aufräumen
-  document.getElementById("blindCountryContainer").classList.add("hidden");
+  // 5. EventContainer aufräumen
   document.getElementById("eventContainer").innerHTML = "";
 
-  // 6. Zurücksetzen der Wett-Buttons (optional)
+  // 6. Zurücksetzen der Wett-Buttons 
   document.getElementById("btn100").disabled = false;
   document.getElementById("btn500").disabled = false;
   document.getElementById("btn1000").disabled = false;
-}
 
+  // 7. Event-Karte zurücksetzen
+  selectEventGlow();
+
+  // 8. Buttons deaktivieren
+  disableButtons();
+}
 
 
 // Funktion, um eine neue Runde zu starten
@@ -127,7 +133,7 @@ function startNewRound() {
   let roundElem = document.getElementById("round");
   roundElem.textContent = parseInt(roundElem.textContent) + 1;
 
-  // Eventrolle neu starten, Werte resetten, etc. (Hier kannst du noch eigene Funktionen einfügen)
+  // Eventrolle neu starten, Werte resetten, etc. 
   document.getElementById("blindCountryContainer").classList.add("hidden");
   document.getElementById("eventContainer").innerHTML = "";  // Beispiel: Event-Inhalt zurücksetzen
 }
@@ -139,7 +145,6 @@ function decreaseValue(amount) {
     currentBet = newBet;
     document.getElementById("valueDisplay").textContent = currentBet;
   } else {
-    // Optional: kleine Warnung oder einfach nichts tun
     console.log("Nicht möglich, unter den letzten Bet zu gehen!");
   }
 }
@@ -235,6 +240,9 @@ function startEventRoll() {
     return;
   }
 
+  // Ensure the event card keeps glowing and player cards do not glow
+  selectEventGlow();
+
   const roundElem = document.getElementById("round");
   const currentRound = parseInt(roundElem.textContent);
 
@@ -284,15 +292,9 @@ function startEventRoll() {
       // Reduce the probability of the selected event
       allEvents = allEvents.filter(event => event !== selectedEvent || Math.random() > eventRepeatProbability);
 
-      if (currentRound >= blindstart) {
-        handleBlindBetSlot(selectedEvent);
-      } else {
-        document.getElementById("blindCountryContainer").classList.add("hidden");
-        document.getElementById("blindCountryContainer").innerHTML = ` 
-          <div style="font-weight: bold; margin-bottom: 0.5rem;">🌍 Blind Bet: Land wird gewählt...</div>
-          <div id="countrySlot" style="display: flex; gap: 10px; justify-content: center;"></div>
-        `;
-      }
+      selectStartingPlayer(); // Startspieler auswählen
+      renderEventDisplay(currentDisplay); // Event-Display aktualisieren
+      enableButtons(); // Buttons wieder aktivieren
     }
   }, 200);
 }
@@ -316,19 +318,6 @@ function renderEventDisplay(events) {
 
     container.appendChild(card);
   });
-}
-
-// Zufälliges Land anzeigen bei Blind Bet
-function handleBlindBetSlot(country) {
-  // Hier kannst du dein Blind Bet mit dem Land (country) behandeln
-  console.log("Blind Bet Country ausgewählt:", country);
-
-  // Beispiel: Land im Container anzeigen
-  const countrySlot = document.getElementById("countrySlot");
-  countrySlot.textContent = country;
-
-  // Optional kannst du den bet-container hier verstecken und was anderes anzeigen.
-  document.getElementById("blindCountryContainer").classList.remove("hidden");
 }
 
 function renderCountryDisplay(countries) {
@@ -358,12 +347,26 @@ function increaseValue(amount) {
   }
 }
 
-
-
 function disableButtons() {
   document.getElementById("btn100").disabled = true;
   document.getElementById("btn500").disabled = true;
   document.getElementById("btn1000").disabled = true;
+  document.getElementById("btnm100").disabled = true;
+  document.getElementById("btnm500").disabled = true;
+  document.getElementById("btnm1000").disabled = true;
+  document.getElementById("submitBtn").disabled = true;
+  document.getElementById("passBtn").disabled = true;
+}
+
+function enableButtons() {
+  document.getElementById("btn100").disabled = false;
+  document.getElementById("btn500").disabled = false;
+  document.getElementById("btn1000").disabled = false;
+  document.getElementById("btnm100").disabled = false;
+  document.getElementById("btnm500").disabled = false;
+  document.getElementById("btnm1000").disabled = false;
+  document.getElementById("submitBtn").disabled = false;
+  document.getElementById("passBtn").disabled = false;
 }
 
 function selectStartingPlayer() {
@@ -371,6 +374,7 @@ function selectStartingPlayer() {
   const startingPlayer = Math.random() < 0.5 ? "player1" : "player2";
 
   // Entferne alle bisherigen Glow-Effekte
+  document.getElementById("eventcard").classList.remove("glow-purple");
   document.getElementById("player1Card").classList.remove("active-turn-player1", "active-turn-player2");
   document.getElementById("player2Card").classList.remove("active-turn-player1", "active-turn-player2");
 
@@ -387,9 +391,16 @@ function selectStartingPlayer() {
   currentPlayerTurn = startingPlayer;
 }
 
+function selectEventGlow() {
+  document.getElementById("eventcard").classList.add("glow-purple");
+  document.getElementById("player1Card").classList.remove("active-turn-player1", "active-turn-player2");
+  document.getElementById("player2Card").classList.remove("active-turn-player1", "active-turn-player2");
+}
+
 // Automatisches Ausführen beim Laden der Seite
 window.onload = function () {
-  selectStartingPlayer(); // Startspieler auswählen, wenn die Seite geladen ist
+  selectEventGlow();
+  disableButtons(); // Deaktiviert die Buttons zu Beginn
 };
 
 function adjustScore(player, value) {
@@ -428,14 +439,17 @@ document.getElementById('opponentSelect').addEventListener('change', (event) => 
   const opponentName = document.getElementById('playername2');
 
   if (selectedOpponent === 'lennli') {
+    player2name = "Lennli";
     opponentImage.src = 'sources/lennli_idle.gif';
     opponentName.textContent = 'Lennli';
   } else if (selectedOpponent === 'kodiak') {
+    player2name = "Kodiak";
     opponentImage.src = 'sources/kodiak_idle.gif';
     opponentName.textContent = 'Kodiak';
   } else {
     opponentImage.src = 'sources/yanek_idle.gif';
     opponentName.textContent = 'Yanek';
+    player2name = "Yanek";
   }
 });
 
