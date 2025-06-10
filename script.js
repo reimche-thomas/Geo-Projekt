@@ -17,6 +17,7 @@ const player1Card = document.getElementById("player1Card");
 const player2Card = document.getElementById("player2Card");
 let blindstart = 8;
 let eventRepeatProbability = 0.5; // Wahrscheinlichkeit, dass ein Event erneut kommt (50%)
+const clickSound = new Audio('sources/click.mp3'); // Load the click sound
 
 function submitBet() {
   if (lastCalledValue === 0) {
@@ -280,6 +281,7 @@ function startEventRoll() {
       container.appendChild(eventElement);
     });
 
+    clickSound.cloneNode(true).play();
     eventQueue.push(eventQueue.shift());
 
     displayCount++;
