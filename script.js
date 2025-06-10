@@ -16,6 +16,7 @@ let player2name = document.getElementById("playername2").textContent;
 const player1Card = document.getElementById("player1Card");
 const player2Card = document.getElementById("player2Card");
 let blindstart = 8;
+let sound_volume = 0.5;
 let eventRepeatProbability = 0.5; // Wahrscheinlichkeit, dass ein Event erneut kommt (50%)
 const clickSound = new Audio('sources/click.mp3'); // Load the click sound
 
@@ -286,7 +287,7 @@ function startEventRoll() {
     });
 
     const clonedClickSound = clickSound.cloneNode(true);
-    clonedClickSound.volume = 0.3;
+    clonedClickSound.volume = sound_volume;;
     clonedClickSound.play();
 
     eventQueue.push(eventQueue.shift());
@@ -473,4 +474,10 @@ document.getElementById('settingsModal').addEventListener('click', (event) => {
 
 document.getElementById('exitSettings').addEventListener('click', () => {
   document.body.classList.remove('settings-active');
+});
+
+document.getElementById("volumeControl").addEventListener("input", function (event) {
+  const volume = event.target.value;
+  sound_volume = volume / 100; // Convert to a value between 0 and 1
+  document.getElementById("volumeValue").textContent = `${volume}%`;
 });

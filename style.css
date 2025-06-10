@@ -963,3 +963,39 @@ body.settings-active #settingsModal {
     /* Further reduced intensity */
   }
 }
+
+#volumeControl {
+  width: 70%;
+  margin: 10px auto;
+  background: linear-gradient(to right, #1BFD9C, #82FFC9);
+  border-radius: 5px;
+  height: 8px;
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+
+#volumeControl::-webkit-slider-thumb {
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  background: #1ceb91;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 5px #0d1411;
+}
+
+#volumeControl::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  background: #1BFD9C;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 5px #1BFD9C;
+}
+
+#volumeValue {
+  font-size: 14px;
+  color: #1BFD9C;
+  text-align: center;
+}
