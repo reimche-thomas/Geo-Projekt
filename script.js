@@ -14,6 +14,7 @@ let lastBetAmount = 0;
 let player1name = document.getElementById("playername1").textContent;
 let player2name = document.getElementById("playername2").textContent;
 let blindstart = 8;
+let eventRepeatProbability = 0.5; // Wahrscheinlichkeit, dass ein Event erneut kommt (50%)
 
 function submitBet() {
   if (lastCalledValue === 0) {
@@ -234,28 +235,23 @@ function startEventRoll() {
     return;
   }
 
-  // Ab Runde 8 sollen wir Länder anstatt Events rollt
   const roundElem = document.getElementById("round");
   const currentRound = parseInt(roundElem.textContent);
 
-  // Wählen wir aus, ob wir Events oder Länder verwenden
   let itemsToDisplay = [];
 
   if (currentRound >= blindstart) {
-    // Ab Runde 8 Blind Bet, daher landen wir auf Ländern
-    document.getElementById("roundTitle").textContent = "BLIND BET COUNTRY"; // Ändere den Titel
-    itemsToDisplay = shuffleArray(countries).slice(0, 5); // Mische die Länder und nimm die ersten 5
+    document.getElementById("roundTitle").textContent = "BLIND BET COUNTRY";
+    itemsToDisplay = shuffleArray(countries).slice(0, 5);
   } else {
-    // Sonst, normale Events anzeigen
-    itemsToDisplay = shuffleArray(allEvents).slice(0, 5); // Mische die Events und nimm die ersten 5
+    itemsToDisplay = shuffleArray(allEvents).slice(0, 5);
   }
 
-  eventQueue = [...itemsToDisplay];  // Setze die Queue mit den passenden Items
+  eventQueue = [...itemsToDisplay];
 
   let displayCount = 0;
   const rollInterval = setInterval(() => {
     if (eventQueue.length < 5) {
-      // Reshuffle bei Bedarf
       eventQueue = eventQueue.concat(itemsToDisplay);
     }
 
@@ -270,13 +266,13 @@ function startEventRoll() {
       eventElement.textContent = event;
 
       if (index === 2) {
-        eventElement.classList.add("center"); // Markiert die mittlere Karte
+        eventElement.classList.add("center");
       }
 
       container.appendChild(eventElement);
     });
 
-    eventQueue.push(eventQueue.shift()); // Dreht die Queue für die nächste Iteration
+    eventQueue.push(eventQueue.shift());
 
     displayCount++;
     if (displayCount > 20) {
@@ -285,8 +281,10 @@ function startEventRoll() {
       const selectedEvent = currentDisplay[2];
       console.log("Gewähltes Event:", selectedEvent);
 
+      // Reduce the probability of the selected event
+      allEvents = allEvents.filter(event => event !== selectedEvent || Math.random() > eventRepeatProbability);
+
       if (currentRound >= blindstart) {
-        // Wenn es ein Blind Bet ist, zeige das Land an
         handleBlindBetSlot(selectedEvent);
       } else {
         document.getElementById("blindCountryContainer").classList.add("hidden");
