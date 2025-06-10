@@ -281,7 +281,9 @@ function startEventRoll() {
       container.appendChild(eventElement);
     });
 
-    clickSound.cloneNode(true).play();
+    const clonedClickSound = clickSound.cloneNode(true); // Clone the audio element
+    clonedClickSound.volume = 0.3; // Set volume to 30%
+    clonedClickSound.play(); // Play the sound
     eventQueue.push(eventQueue.shift());
 
     displayCount++;
