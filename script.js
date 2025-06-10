@@ -241,7 +241,6 @@ function startEventRoll() {
     return;
   }
 
-  // Ensure the event card keeps glowing and player cards do not glow
   selectEventGlow();
 
   const roundElem = document.getElementById("round");
@@ -259,7 +258,12 @@ function startEventRoll() {
   eventQueue = [...itemsToDisplay];
 
   let displayCount = 0;
-  const rollInterval = setInterval(() => {
+  let maxDisplays = 35;
+  let baseDelay = 20; // Anfangsgeschwindigkeit
+  let delayIncrement = 1.1; // Wie stark das Intervall sich vergrößert
+  let currentDelay = baseDelay;
+
+  function rollStep() {
     if (eventQueue.length < 5) {
       eventQueue = eventQueue.concat(itemsToDisplay);
     }
@@ -281,27 +285,31 @@ function startEventRoll() {
       container.appendChild(eventElement);
     });
 
-    const clonedClickSound = clickSound.cloneNode(true); // Clone the audio element
-    clonedClickSound.volume = 0.3; // Set volume to 30%
-    clonedClickSound.play(); // Play the sound
+    const clonedClickSound = clickSound.cloneNode(true);
+    clonedClickSound.volume = 0.3;
+    clonedClickSound.play();
+
     eventQueue.push(eventQueue.shift());
 
     displayCount++;
-    if (displayCount > 20) {
-      clearInterval(rollInterval);
-
+    if (displayCount > maxDisplays) {
       const selectedEvent = currentDisplay[2];
       console.log("Gewähltes Event:", selectedEvent);
 
-      // Reduce the probability of the selected event
       allEvents = allEvents.filter(event => event !== selectedEvent || Math.random() > eventRepeatProbability);
 
-      selectStartingPlayer(); // Startspieler auswählen
-      renderEventDisplay(currentDisplay); // Event-Display aktualisieren
-      enableButtons(); // Buttons wieder aktivieren
+      selectStartingPlayer();
+      renderEventDisplay(currentDisplay);
+      enableButtons();
+    } else {
+      currentDelay *= delayIncrement; // Verzögerung erhöhen für "langsamer werdenden" Effekt
+      setTimeout(rollStep, currentDelay);
     }
-  }, 200);
+  }
+
+  rollStep(); // Start der Roll-Animation
 }
+
 
 function renderEventDisplay(events) {
   const container = document.getElementById("eventContainer");
