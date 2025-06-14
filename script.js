@@ -481,3 +481,9 @@ document.getElementById("volumeControl").addEventListener("input", function (eve
   sound_volume = volume / 100; // Convert to a value between 0 and 1
   document.getElementById("volumeValue").textContent = `${volume}%`;
 });
+
+document.getElementById("blindStartControl").addEventListener("input", function (event) {
+  const blindStart = event.target.value;
+  blindstart = parseInt(blindStart, 10); // Update the blindstart variable
+  document.getElementById("blindStartValue").textContent = blindStart;
+});
