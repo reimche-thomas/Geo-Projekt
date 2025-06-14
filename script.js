@@ -126,6 +126,9 @@ function resolveBet(success) {
 
   // 8. Buttons deaktivieren
   disableButtons();
+
+  // Update the round title after resolving the bet
+  adjustRounds();
 }
 
 
