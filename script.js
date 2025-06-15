@@ -359,7 +359,12 @@ function increaseValue(amount) {
 
   // Prüfen und ggf. Buttons deaktivieren
   if (currentBet >= maxValue) {
-    disableButtons();
+    document.getElementById("btn100").disabled = true;
+    document.getElementById("btn500").disabled = true;
+    document.getElementById("btn1000").disabled = true;
+    document.getElementById("btnm100").disabled = true;
+    document.getElementById("btnm500").disabled = true;
+    document.getElementById("btnm1000").disabled = true;
   }
 }
 
